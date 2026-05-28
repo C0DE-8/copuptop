@@ -1,0 +1,170 @@
+.page {
+  min-height: 100vh;
+  padding: 32px;
+  background: #f6f8fb;
+  color: #111827;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.header p {
+  margin: 0 0 8px;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 32px;
+}
+
+.header nav {
+  display: flex;
+  gap: 10px;
+}
+
+.header a,
+.tableHeader a {
+  padding: 10px 14px;
+  border: 1px solid #dbe3ef;
+  border-radius: 8px;
+  color: #1d4ed8;
+  background: #ffffff;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.balanceCard,
+.card,
+.table {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.balanceCard,
+.card {
+  padding: 22px;
+}
+
+.balanceCard {
+  background: #101827;
+  color: #ffffff;
+}
+
+.balanceCard p,
+.card p {
+  margin: 0 0 12px;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.balanceCard p,
+.balanceCard span {
+  color: #cbd5e1;
+}
+
+.balanceCard strong {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 38px;
+}
+
+.card strong {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 26px;
+  text-transform: capitalize;
+}
+
+.card span,
+.balanceCard span {
+  color: #64748b;
+}
+
+.table {
+  padding: 8px;
+}
+
+.tableHeader,
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
+.tableHeader {
+  padding: 14px;
+  border-bottom: 1px solid #edf1f7;
+}
+
+.tableHeader h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.row {
+  padding: 16px 14px;
+  border-bottom: 1px solid #edf1f7;
+}
+
+.row:last-child {
+  border-bottom: 0;
+}
+
+.credit {
+  color: #047857;
+}
+
+.debit {
+  color: #b91c1c;
+}
+
+.empty,
+.error {
+  margin: 0;
+  padding: 14px;
+}
+
+.error {
+  margin-bottom: 16px;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+@media (max-width: 900px) {
+  .page {
+    padding: 20px;
+  }
+
+  .header,
+  .tableHeader,
+  .row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

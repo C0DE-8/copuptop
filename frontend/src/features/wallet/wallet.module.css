@@ -1,0 +1,173 @@
+.page {
+  min-height: 100vh;
+  padding: 32px;
+  background: #f6f8fb;
+  color: #111827;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: flex-end;
+  margin-bottom: 24px;
+}
+
+.header p {
+  margin: 0 0 8px;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 32px;
+}
+
+.header strong {
+  padding: 16px 18px;
+  border-radius: 8px;
+  background: #101827;
+  color: #ffffff;
+  font-size: 24px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 18px;
+}
+
+.form,
+.ledger {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.form {
+  display: grid;
+  align-content: start;
+  gap: 16px;
+  padding: 22px;
+}
+
+.form h2,
+.ledger h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.form label {
+  display: grid;
+  gap: 8px;
+  color: #334155;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.form input {
+  height: 44px;
+  border: 1px solid #d7dde7;
+  border-radius: 8px;
+  padding: 0 12px;
+  font: inherit;
+}
+
+.form button {
+  height: 46px;
+  border: 0;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #ffffff;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.form button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.ledger {
+  padding: 8px;
+}
+
+.ledger h2 {
+  padding: 14px;
+  border-bottom: 1px solid #edf1f7;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 16px 14px;
+  border-bottom: 1px solid #edf1f7;
+}
+
+.row:last-child {
+  border-bottom: 0;
+}
+
+.row div {
+  display: grid;
+  gap: 5px;
+}
+
+.row span {
+  color: #64748b;
+  font-size: 13px;
+}
+
+.row p {
+  margin: 0;
+  font-weight: 800;
+}
+
+.credit {
+  color: #047857;
+}
+
+.debit {
+  color: #b91c1c;
+}
+
+.error,
+.success,
+.empty {
+  margin: 0;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.error {
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.success {
+  border: 1px solid #bbf7d0;
+  background: #f0fdf4;
+  color: #047857;
+}
+
+@media (max-width: 900px) {
+  .page {
+    padding: 20px;
+  }
+
+  .header,
+  .row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
