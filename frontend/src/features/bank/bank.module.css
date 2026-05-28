@@ -51,12 +51,45 @@
   font-weight: 700;
 }
 
-.form input {
+.form input,
+.form select {
   height: 44px;
   border: 1px solid #d7dde7;
   border-radius: 8px;
   padding: 0 12px;
   font: inherit;
+  color: #111827;
+  background: #ffffff;
+}
+
+.form input:disabled,
+.form select:disabled {
+  cursor: wait;
+  background: #f8fafc;
+}
+
+.resolveBox {
+  display: grid;
+  gap: 6px;
+  padding: 14px;
+  border: 1px solid #dbeafe;
+  border-radius: 8px;
+  background: #eff6ff;
+}
+
+.resolveBox span {
+  color: #1d4ed8;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.resolveBox strong {
+  color: #111827;
+}
+
+.resolveBox small {
+  color: #b91c1c;
 }
 
 .form button {

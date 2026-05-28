@@ -1,55 +1,11 @@
-import { Link, Navigate, Outlet, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import Login from './features/auth/login'
 import Register from './features/auth/register'
 import Dashboard from './features/dashboard/dashboard'
 import Wallet from './features/wallet/wallet'
 import Bank from './features/bank/bank'
-import styles from './App.module.css'
-
-const isAuthenticated = () => Boolean(localStorage.getItem('copup_access_token'))
-
-const ProtectedRoute = () => {
-  const location = useLocation()
-
-  if (!isAuthenticated()) {
-    return <Navigate to="/" replace state={{ from: location }} />
-  }
-
-  return <Outlet />
-}
-
-const AppShell = () => {
-  const navigate = useNavigate()
-
-  const handleLogout = () => {
-    localStorage.removeItem('copup_access_token')
-    localStorage.removeItem('copup_refresh_token')
-    localStorage.removeItem('copup_user')
-    navigate('/', { replace: true })
-  }
-
-  return (
-    <div className={styles.shell}>
-      <aside className={styles.sidebar}>
-        <Link className={styles.brand} to="/dashboard">
-          <span>CB</span>
-          <strong>Copup Bank</strong>
-        </Link>
-        <nav>
-          <Link to="/dashboard">Dashboard</Link>
-          <Link to="/wallet">Wallet</Link>
-          <Link to="/bank">Bank</Link>
-        </nav>
-        <button type="button" onClick={handleLogout}>
-          Logout
-        </button>
-      </aside>
-      <main className={styles.content}>
-        <Outlet />
-      </main>
-    </div>
-  )
-}
+import AppShell from './components/app-shell'
+import ProtectedRoute, { isAuthenticated } from './routes/protected-route'
 
 const App = () => (
   <Routes>

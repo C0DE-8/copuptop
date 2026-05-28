@@ -71,11 +71,17 @@ app.use((req, res) => {
 });
 
 app.use((err, req, res, next) => {
-    console.error(err);
+    console.error({
+        message: err.message,
+        status: err.status || err.response?.status || 500,
+        provider: err.response?.data || null,
+        path: req.path
+    });
 
-    res.status(err.status || 500).json({
+    res.status(err.status || err.response?.status || 500).json({
         status: false,
-        message: process.env.NODE_ENV === 'production' ? 'Internal server error' : err.message
+        message: err.response?.data?.message ||
+            (process.env.NODE_ENV === 'production' ? 'Internal server error' : err.message)
     });
 });
 
@@ -83,8 +89,10 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 1159;
 
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
 
     console.log(`Server running on port http://localhost:${PORT}`);
 
 });
+
+server.ref();

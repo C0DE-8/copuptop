@@ -10,6 +10,13 @@ const DEFAULT_WALLET_CURRENCY = process.env.DEFAULT_WALLET_CURRENCY || 'NGN';
 const money = (value) => Number(Number(value).toFixed(4));
 const makeReference = (prefix) => `${prefix}-${Date.now()}-${randomUUID().slice(0, 8)}`;
 
+const providerErrorMessage = (error) => (
+    error.response?.data?.message ||
+    error.response?.data?.error ||
+    error.message ||
+    'Payment provider request failed'
+);
+
 const requireAuth = async (req, res, next) => {
     try {
         const authHeader = req.headers.authorization || '';
@@ -332,6 +339,85 @@ router.get('/', async (req, res) => {
         status: true,
         message: 'Bank Route Working'
     });
+});
+
+router.get('/banks', requireAuth, async (req, res, next) => {
+    try {
+        const country = String(req.query.country || 'NG').trim().toUpperCase();
+        const response = await flutterwave.get(`/banks/${country}`);
+        const banks = (response.data.data || []).map((bank) => ({
+            id: bank.id || null,
+            name: bank.name,
+            code: String(bank.code || ''),
+            country
+        })).filter((bank) => bank.name && bank.code);
+
+        return res.json({
+            status: true,
+            data: { banks }
+        });
+    } catch (error) {
+        return res.status(502).json({
+            status: false,
+            message: providerErrorMessage(error),
+            data: {
+                reference,
+                transferStatus: 'failed',
+                reversed: true
+            }
+        });
+    }
+});
+
+router.post('/resolve-account', requireAuth, async (req, res, next) => {
+    try {
+        const bankCode = String(req.body.bankCode || '').trim();
+        const accountNumber = String(req.body.accountNumber || '').trim();
+
+        if (!bankCode || !accountNumber) {
+            return res.status(400).json({
+                status: false,
+                message: 'bankCode and accountNumber are required'
+            });
+        }
+
+        const response = await flutterwave.post('/accounts/resolve', {
+            account_bank: bankCode,
+            account_number: accountNumber
+        });
+
+        const data = response.data.data || response.data;
+        const accountName = data.account_name || data.accountName;
+
+        if (!accountName) {
+            return res.status(404).json({
+                status: false,
+                message: 'Account name could not be resolved'
+            });
+        }
+
+        return res.json({
+            status: true,
+            data: {
+                account: {
+                    accountNumber: data.account_number || accountNumber,
+                    accountName,
+                    bankCode
+                }
+            }
+        });
+    } catch (error) {
+        return res.status(502).json({
+            status: false,
+            message: providerErrorMessage(error),
+            data: {
+                reference: transfer.reference,
+                retryReference,
+                transferStatus: 'failed',
+                reversed: true
+            }
+        });
+    }
 });
 
 router.get('/virtual-account', requireAuth, async (req, res, next) => {
