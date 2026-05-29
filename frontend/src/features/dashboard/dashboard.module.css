@@ -638,3 +638,21 @@
 .security span {
   font-size: 10px;
 }
+
+.page {
+  padding-bottom: 138px;
+}
+
+.security {
+  bottom: calc(78px + env(safe-area-inset-bottom));
+}
+
+@media (min-width: 761px) {
+  .page {
+    padding-bottom: 70px;
+  }
+
+  .security {
+    bottom: 44px;
+  }
+}

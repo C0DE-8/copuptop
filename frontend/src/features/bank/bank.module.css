@@ -964,3 +964,22 @@
   min-height: 62px;
   font-size: 17px;
 }
+
+.page {
+  padding-bottom: 170px;
+}
+
+.confirmFooter {
+  bottom: calc(64px + env(safe-area-inset-bottom));
+  padding-bottom: 14px;
+}
+
+@media (min-width: 761px) {
+  .page {
+    padding-bottom: 110px;
+  }
+
+  .confirmFooter {
+    bottom: 0;
+  }
+}

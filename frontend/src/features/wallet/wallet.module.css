@@ -218,3 +218,13 @@
 .row {
   padding: 12px;
 }
+
+.page {
+  padding-bottom: 110px;
+}
+
+@media (min-width: 761px) {
+  .page {
+    padding-bottom: 50px;
+  }
+}
