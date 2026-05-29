@@ -63,6 +63,22 @@ app.get('/', (req, res) => {
 
 });
 
+app.get('/api/debug/outbound-ip', async (req, res, next) => {
+    try {
+        const ipCheck = await fetch('https://api.ipify.org?format=json');
+        const data = await ipCheck.json();
+
+        console.log('BACKEND OUTBOUND IP:', data);
+
+        res.json({
+            status: true,
+            data
+        });
+    } catch (error) {
+        return next(error);
+    }
+});
+
 app.use((req, res) => {
     res.status(404).json({
         status: false,

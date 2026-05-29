@@ -35,37 +35,61 @@ const Bank = () => {
   }, [])
 
   useEffect(() => {
-    const shouldResolve = form.bankCode && form.accountNumber.trim().length >= 10
-
-    setForm((current) => ({ ...current, accountName: shouldResolve ? current.accountName : '' }))
-    setResolveError('')
+    const bankCode = form.bankCode
+    const accountNumberToResolve = form.accountNumber.trim()
+    const shouldResolve = bankCode && accountNumberToResolve.length >= 10
 
     if (!shouldResolve) {
       return undefined
     }
 
+    let active = true
+
     const timeout = window.setTimeout(async () => {
       setResolving(true)
+      setResolveError('')
 
       try {
         const response = await resolveBankAccount({
-          bankCode: form.bankCode,
-          accountNumber: form.accountNumber.trim(),
+          bankCode,
+          accountNumber: accountNumberToResolve,
         })
+
+        if (!active) {
+          return
+        }
 
         setForm((current) => ({
           ...current,
-          accountName: response.data.account.accountName,
+          accountName:
+            current.bankCode === bankCode && current.accountNumber.trim() === accountNumberToResolve
+              ? response.data.account.accountName
+              : current.accountName,
         }))
       } catch (err) {
-        setForm((current) => ({ ...current, accountName: '' }))
+        if (!active) {
+          return
+        }
+
+        setForm((current) => ({
+          ...current,
+          accountName:
+            current.bankCode === bankCode && current.accountNumber.trim() === accountNumberToResolve
+              ? ''
+              : current.accountName,
+        }))
         setResolveError(err.response?.data?.message || 'Account could not be resolved')
       } finally {
-        setResolving(false)
+        if (active) {
+          setResolving(false)
+        }
       }
     }, 550)
 
-    return () => window.clearTimeout(timeout)
+    return () => {
+      active = false
+      window.clearTimeout(timeout)
+    }
   }, [form.bankCode, form.accountNumber])
 
   const filteredBanks = useMemo(() => {
@@ -79,11 +103,23 @@ const Bank = () => {
   }, [banks, bankSearch])
 
   const selectedBank = banks.find((bank) => bank.code === form.bankCode)
-  const canSubmit = form.bankCode && form.accountNumber && form.accountName && Number(form.amount) > 0
+  const accountNumber = form.accountNumber.trim()
+  const amount = Number(form.amount)
+  const canSubmit = form.bankCode && accountNumber.length === 10 && form.accountName && amount > 0
 
   const handleChange = (event) => {
     const { name, value } = event.target
-    setForm((current) => ({ ...current, [name]: value }))
+    const nextValue = name === 'accountNumber' ? value.replace(/\D/g, '').slice(0, 10) : value
+
+    setForm((current) => ({
+      ...current,
+      [name]: nextValue,
+      ...(name === 'accountNumber' ? { accountName: '' } : {}),
+    }))
+
+    if (name === 'accountNumber') {
+      setResolveError('')
+    }
   }
 
   const handleBankSelect = (event) => {
@@ -113,10 +149,10 @@ const Bank = () => {
     try {
       const response = await transferToBank({
         bankCode: form.bankCode,
-        accountNumber: form.accountNumber.trim(),
-        accountName: form.accountName,
-        amount: Number(form.amount),
-        narration: form.narration || 'Copup Bank transfer',
+        accountNumber,
+        accountName: form.accountName.trim(),
+        amount,
+        narration: form.narration.trim() || 'Copup Bank transfer',
       })
       setResult(response.data)
       setForm({

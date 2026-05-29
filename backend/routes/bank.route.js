@@ -359,12 +359,7 @@ router.get('/banks', requireAuth, async (req, res, next) => {
     } catch (error) {
         return res.status(502).json({
             status: false,
-            message: providerErrorMessage(error),
-            data: {
-                reference,
-                transferStatus: 'failed',
-                reversed: true
-            }
+            message: providerErrorMessage(error)
         });
     }
 });
@@ -409,13 +404,7 @@ router.post('/resolve-account', requireAuth, async (req, res, next) => {
     } catch (error) {
         return res.status(502).json({
             status: false,
-            message: providerErrorMessage(error),
-            data: {
-                reference: transfer.reference,
-                retryReference,
-                transferStatus: 'failed',
-                reversed: true
-            }
+            message: providerErrorMessage(error)
         });
     }
 });
@@ -570,10 +559,25 @@ router.post('/transfer', requireAuth, async (req, res, next) => {
     const narration = String(req.body.narration || 'Copup Bank transfer').trim().slice(0, 180);
     const reference = String(req.body.reference || makeReference('CUP-BANK')).trim().slice(0, 80);
 
-    if (!amount || amount <= 0 || !bankCode || !accountNumber) {
+    const missingFields = [];
+
+    if (!Number.isFinite(amount) || amount <= 0) {
+        missingFields.push('amount');
+    }
+
+    if (!bankCode) {
+        missingFields.push('bankCode');
+    }
+
+    if (!accountNumber) {
+        missingFields.push('accountNumber');
+    }
+
+    if (missingFields.length > 0) {
         return res.status(400).json({
             status: false,
-            message: 'amount, bankCode, and accountNumber are required'
+            message: `${missingFields.join(', ')} ${missingFields.length === 1 ? 'is' : 'are'} required`,
+            errors: missingFields
         });
     }
 
