@@ -1,158 +1,966 @@
 .page {
   min-height: 100vh;
-  padding: 32px;
-  background: #f6f8fb;
-  color: #111827;
+  padding: 24px clamp(18px, 4vw, 24px) 102px;
+  background: #1a1a1a;
+  color: #f4f4f5;
 }
 
-.header {
-  margin-bottom: 24px;
+.topbar,
+.promo,
+.freeTransfers,
+.transferCard,
+.monitor,
+.recipients,
+.pickerTopbar,
+.pickerSearch,
+.frequentBanks,
+.bankList,
+.recipientSummary,
+.amountFlow {
+  max-width: 620px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
-.header p,
-.panel p {
-  margin: 0 0 8px;
-  color: #64748b;
-  font-size: 13px;
-  font-weight: 800;
-  text-transform: uppercase;
+.topbar,
+.pickerTopbar {
+  min-height: 52px;
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 14px;
 }
 
-.header h1 {
-  max-width: 720px;
+.pickerTopbar {
+  grid-template-columns: 40px minmax(0, 1fr);
+}
+
+.topbar h1,
+.pickerTopbar h1 {
   margin: 0;
-  font-size: 32px;
+  color: #eeeeee;
+  font-size: clamp(20px, 4.8vw, 26px);
+  font-weight: 500;
 }
 
-.layout {
+.topbar button,
+.pickerTopbar button {
+  width: 40px;
+  height: 40px;
   display: grid;
-  grid-template-columns: minmax(320px, 520px) 1fr;
-  gap: 18px;
-}
-
-.form,
-.panel {
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  background: #ffffff;
-}
-
-.form {
-  display: grid;
-  gap: 16px;
-  padding: 22px;
-}
-
-.form label {
-  display: grid;
-  gap: 8px;
-  color: #334155;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.form input,
-.form select {
-  height: 44px;
-  border: 1px solid #d7dde7;
-  border-radius: 8px;
-  padding: 0 12px;
-  font: inherit;
-  color: #111827;
-  background: #ffffff;
-}
-
-.form input:disabled,
-.form select:disabled {
-  cursor: wait;
-  background: #f8fafc;
-}
-
-.resolveBox {
-  display: grid;
-  gap: 6px;
-  padding: 14px;
-  border: 1px solid #dbeafe;
-  border-radius: 8px;
-  background: #eff6ff;
-}
-
-.resolveBox span {
-  color: #1d4ed8;
-  font-size: 13px;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-.resolveBox strong {
-  color: #111827;
-}
-
-.resolveBox small {
-  color: #b91c1c;
-}
-
-.form button {
-  height: 46px;
+  place-items: center;
   border: 0;
   border-radius: 8px;
-  background: #2563eb;
-  color: #ffffff;
-  font: inherit;
-  font-weight: 800;
+  background: transparent;
+  color: #f4f4f5;
   cursor: pointer;
 }
 
-.form button:disabled {
-  cursor: wait;
-  opacity: 0.7;
+.topbar svg,
+.pickerTopbar svg {
+  width: 24px;
+  height: 24px;
 }
 
-.panel {
-  align-self: start;
-  padding: 24px;
+.topbar a {
+  color: #28d0a8;
+  font-size: 17px;
+  font-weight: 700;
+  text-decoration: none;
 }
 
-.panel h2 {
-  max-width: 520px;
-  margin: 0 0 24px;
-  font-size: 28px;
-  line-height: 1.15;
+.promo {
+  min-height: 136px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  margin-top: 8px;
+  padding: 22px 28px;
+  border-radius: 16px;
+  background:
+    radial-gradient(circle at 9% 30%, rgba(253, 82, 123, 0.7) 0 8px, transparent 9px),
+    radial-gradient(circle at 84% 28%, rgba(42, 208, 168, 0.45) 0 42px, transparent 43px),
+    linear-gradient(135deg, #ecfff6, #e9fff8);
+  color: #15372f;
 }
 
-.panel ul {
+.promo strong,
+.promo span {
+  display: block;
+}
+
+.promo strong {
+  max-width: 300px;
+  font-size: clamp(21px, 5vw, 28px);
+  font-weight: 950;
+  line-height: 1.12;
+}
+
+.promo span {
+  margin-top: 8px;
+  color: #26c5a0;
+  font-size: clamp(26px, 7vw, 38px);
+  font-weight: 950;
+  line-height: 1;
+}
+
+.promo button {
+  min-height: 54px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 999px;
+  background: #28d0a8;
+  color: #ffffff;
+  font: inherit;
+  font-size: 20px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.freeTransfers {
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 20px;
+  padding: 0 26px;
+  border-radius: 8px;
+  background: #382b58;
+  color: #b99aff;
+  font-size: 18px;
+}
+
+.freeTransfers span {
+  width: 20px;
+  height: 20px;
   display: grid;
-  gap: 12px;
-  margin: 0;
-  padding-left: 20px;
-  color: #475569;
+  place-items: center;
+  border-radius: 50%;
+  background: #7c3aed;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 950;
+}
+
+.freeTransfers strong {
+  color: #a78bfa;
+  font-size: 22px;
+}
+
+.transferCard,
+.monitor,
+.recipients,
+.frequentBanks {
+  margin-top: 18px;
+  border-radius: 16px;
+  background: #2b2b2b;
+}
+
+.transferCard {
+  display: grid;
+  gap: 18px;
+  padding: 28px 24px 30px;
+}
+
+.transferCard h2 {
+  margin: 0 0 4px;
+  color: #f3f3f3;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.transferCard input,
+.bankButton {
+  width: 100%;
+  min-height: 54px;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+  color: #eeeeee;
+  font: inherit;
+  font-size: 20px;
+  outline: none;
+}
+
+.transferCard input::placeholder {
+  color: #8c8c8c;
+}
+
+.bankButton {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #8c8c8c;
+  text-align: left;
+  cursor: pointer;
+}
+
+.bankButton span,
+.bankList button span,
+.frequentBanks button span {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #e6fff8;
+  color: #28d0a8;
+  font-weight: 950;
+}
+
+.bankButton svg {
+  margin-left: auto;
+  color: #858585;
+}
+
+.resolveBox,
+.resolveSuccess {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 16px;
+  border-radius: 14px;
+  background: #3a2f42;
+  color: #d6c6ff;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.resolveSuccess {
+  background: #0f513d;
+  color: #8ff0d1;
+}
+
+.resolveBox svg,
+.resolveSuccess svg {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
+  padding: 5px;
+  border-radius: 50%;
+  background: #28d0a8;
+  color: #ffffff;
+}
+
+.nextButton {
+  min-height: 74px;
+  margin-top: 4px;
+  border: 0;
+  border-radius: 999px;
+  background: #28d0a8;
+  color: #17342e;
+  font: inherit;
+  font-size: 20px;
+  font-weight: 950;
+  cursor: pointer;
+}
+
+.nextButton:disabled {
+  background: #0f6c52;
+  color: #0f2c25;
+  cursor: not-allowed;
+}
+
+.monitor {
+  min-height: 74px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  padding: 0 24px;
+  border: 0;
+  color: #ffffff;
+  font: inherit;
+  font-size: 17px;
+  font-weight: 750;
+  text-align: left;
+  cursor: pointer;
+}
+
+.monitor span {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #e5fff8;
+  color: #28d0a8;
+}
+
+.monitor svg {
+  width: 23px;
+  height: 23px;
+}
+
+.monitor > svg {
+  color: #5b5b5b;
+}
+
+.recipients {
+  overflow: hidden;
+}
+
+.tabs {
+  min-height: 84px;
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  gap: 34px;
+  align-items: end;
+  padding: 0 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.tabs button {
+  position: relative;
+  height: 58px;
+  border: 0;
+  background: transparent;
+  color: #b9b9b9;
+  font: inherit;
+  font-size: 20px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.tabs button.activeTab {
+  color: #28d0a8;
+}
+
+.tabs button.activeTab::after {
+  content: "";
+  position: absolute;
+  right: 20%;
+  bottom: 0;
+  left: 20%;
+  height: 3px;
+  border-radius: 999px;
+  background: #28d0a8;
+}
+
+.tabs > svg {
+  justify-self: end;
+  align-self: center;
+  width: 27px;
+  height: 27px;
+  color: #28d0a8;
+}
+
+.recipientList {
+  display: grid;
+}
+
+.recipientList button {
+  min-width: 0;
+  min-height: 112px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+  margin: 0 24px;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  background: transparent;
+  color: #ffffff;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.recipientList strong,
+.recipientList em {
+  display: block;
+}
+
+.recipientList strong {
+  overflow: hidden;
+  font-size: 18px;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recipientList em {
+  margin-top: 10px;
+  color: #a5a5a5;
+  font-size: 17px;
+  font-style: normal;
+}
+
+.recipientList i {
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #2563eb;
+  font-style: normal;
+  font-weight: 950;
+}
+
+.recipientList button:first-child i {
+  background: #4c1d95;
+  color: #ffffff;
+}
+
+.viewAll {
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 16px auto 18px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 999px;
+  background: #1c1c1c;
+  color: #bdbdbd;
+  font: inherit;
+  cursor: pointer;
+}
+
+.pickerSearch {
+  min-height: 62px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  margin-top: 28px;
+  padding: 0 20px;
+  border-radius: 8px;
+  background: #111111;
+  color: #667085;
+}
+
+.pickerSearch input {
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: #eeeeee;
+  font: inherit;
+  font-size: 18px;
+  outline: none;
+}
+
+.frequentBanks {
+  padding: 20px 18px 26px;
+}
+
+.frequentBanks h2,
+.bankList h2 {
+  margin: 0 0 18px;
+  color: #eeeeee;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.frequentBanks div {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px 12px;
+}
+
+.frequentBanks button {
+  min-width: 0;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  border: 0;
+  background: transparent;
+  color: #eeeeee;
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+}
+
+.frequentBanks button:disabled {
+  opacity: 0.45;
+  cursor: wait;
+}
+
+.bankList {
+  margin-top: 24px;
+  padding-bottom: 40px;
+}
+
+.bankList h2 {
+  margin: 0 -24px 0;
+  padding: 10px 24px;
+  background: #222222;
+}
+
+.bankList button {
+  width: 100%;
+  min-height: 88px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  background: transparent;
+  color: #eeeeee;
+  font: inherit;
+  font-size: 20px;
+  text-align: left;
+  cursor: pointer;
 }
 
 .error,
 .success {
   margin: 0;
-  padding: 12px;
-  border-radius: 8px;
+  padding: 13px 15px;
+  border-radius: 10px;
+  font-size: 14px;
 }
 
 .error {
-  border: 1px solid #fecaca;
-  background: #fef2f2;
-  color: #b91c1c;
+  border: 1px solid rgba(251, 113, 133, 0.45);
+  background: rgba(127, 29, 29, 0.36);
+  color: #fecdd3;
 }
 
 .success {
-  border: 1px solid #bbf7d0;
-  background: #f0fdf4;
-  color: #047857;
+  border: 1px solid rgba(40, 208, 168, 0.45);
+  background: rgba(20, 83, 45, 0.42);
+  color: #9ff8dc;
 }
 
-@media (max-width: 900px) {
+.recipientSummary {
+  min-height: 88px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+}
+
+.recipientSummary span {
+  width: 70px;
+  height: 70px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #2563eb;
+  font-size: 30px;
+  font-weight: 950;
+}
+
+.recipientSummary strong,
+.recipientSummary em {
+  display: block;
+}
+
+.recipientSummary strong {
+  overflow: hidden;
+  color: #ffffff;
+  font-size: 19px;
+  font-weight: 950;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recipientSummary em {
+  margin-top: 6px;
+  color: #a3a3a3;
+  font-size: 16px;
+  font-style: normal;
+}
+
+.amountFlow {
+  display: grid;
+  gap: 22px;
+  margin-top: 18px;
+}
+
+.amountCard,
+.remarkCard {
+  border-radius: 16px;
+  background: #2b2b2b;
+  padding: 24px;
+}
+
+.amountCard h2,
+.remarkCard h2 {
+  margin: 0 0 24px;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 850;
+}
+
+.amountCard label {
+  min-height: 72px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.amountCard label span {
+  color: #f4f4f5;
+  font-size: 34px;
+  font-weight: 900;
+}
+
+.amountCard input,
+.remarkCard input {
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: #eeeeee;
+  font: inherit;
+  outline: none;
+}
+
+.amountCard input {
+  font-size: clamp(30px, 8vw, 40px);
+}
+
+.amountCard input::placeholder,
+.remarkCard input::placeholder {
+  color: #818181;
+}
+
+.amountPresets,
+.remarkPresets {
+  display: grid;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.amountPresets {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.remarkPresets {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.amountPresets button,
+.remarkPresets button {
+  min-height: 66px;
+  border: 0;
+  border-radius: 8px;
+  background: #161616;
+  color: #c9c9c9;
+  font: inherit;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.remarkCard input {
+  width: 100%;
+  min-height: 58px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 18px;
+}
+
+.confirmFooter {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 20px 24px 28px;
+  background: linear-gradient(180deg, transparent, #1a1a1a 18%);
+}
+
+.confirmFooter button {
+  width: 100%;
+  min-height: 74px;
+  border: 0;
+  border-radius: 999px;
+  background: #28d0a8;
+  color: #17342e;
+  font: inherit;
+  font-size: 20px;
+  font-weight: 950;
+  cursor: pointer;
+}
+
+.confirmFooter button:disabled {
+  background: #0f6c52;
+  color: #0f2c25;
+  cursor: not-allowed;
+}
+
+@media (min-width: 761px) {
   .page {
+    padding-bottom: 38px;
+  }
+}
+
+@media (max-width: 520px) {
+  .page {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+
+  .promo {
+    min-height: 136px;
     padding: 20px;
   }
 
-  .layout {
-    grid-template-columns: 1fr;
+  .promo button {
+    padding: 0 18px;
   }
+
+  .transferCard {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+
+  .recipientList button {
+    margin-right: 24px;
+    margin-left: 24px;
+  }
+}
+
+.page {
+  padding-top: 14px;
+  padding-bottom: 88px;
+}
+
+.topbar,
+.pickerTopbar {
+  min-height: 44px;
+  margin-bottom: 10px;
+}
+
+.topbar h1,
+.pickerTopbar h1 {
+  font-size: clamp(18px, 4.4vw, 22px);
+}
+
+.topbar button,
+.pickerTopbar button {
+  width: 34px;
+  height: 34px;
+}
+
+.topbar svg,
+.pickerTopbar svg {
+  width: 21px;
+  height: 21px;
+}
+
+.topbar a {
+  font-size: 14px;
+}
+
+.promo {
+  min-height: 104px;
+  margin-top: 4px;
+  padding: 16px 20px;
+  border-radius: 13px;
+}
+
+.promo strong {
+  font-size: clamp(17px, 4.3vw, 22px);
+}
+
+.promo span {
+  margin-top: 5px;
+  font-size: clamp(22px, 6vw, 30px);
+}
+
+.promo button {
+  min-height: 44px;
+  padding: 0 18px;
+  font-size: 16px;
+}
+
+.freeTransfers {
+  min-height: 48px;
+  margin-top: 12px;
+  padding: 0 18px;
+  font-size: 15px;
+}
+
+.transferCard,
+.monitor,
+.recipients,
+.frequentBanks {
+  margin-top: 12px;
+  border-radius: 13px;
+}
+
+.transferCard {
+  gap: 13px;
+  padding: 20px 20px 22px;
+}
+
+.transferCard h2 {
+  font-size: 17px;
+}
+
+.transferCard input,
+.bankButton {
+  min-height: 46px;
+  font-size: 17px;
+}
+
+.bankButton span,
+.bankList button span,
+.frequentBanks button span {
+  width: 36px;
+  height: 36px;
+}
+
+.resolveBox,
+.resolveSuccess {
+  min-height: 52px;
+  font-size: 14px;
+}
+
+.nextButton {
+  min-height: 60px;
+  font-size: 17px;
+}
+
+.monitor {
+  min-height: 58px;
+  gap: 12px;
+  padding: 0 18px;
+  font-size: 14px;
+}
+
+.monitor span {
+  width: 40px;
+  height: 40px;
+}
+
+.tabs {
+  min-height: 64px;
+  gap: 26px;
+  padding: 0 24px;
+}
+
+.tabs button {
+  height: 46px;
+  font-size: 17px;
+}
+
+.recipientList button {
+  min-height: 86px;
+}
+
+.recipientList strong {
+  font-size: 15px;
+}
+
+.recipientList em {
+  margin-top: 6px;
+  font-size: 14px;
+}
+
+.recipientList i {
+  width: 44px;
+  height: 44px;
+}
+
+.pickerSearch {
+  min-height: 50px;
+  margin-top: 18px;
+}
+
+.frequentBanks {
+  padding: 16px 14px 20px;
+}
+
+.frequentBanks h2,
+.bankList h2 {
+  margin-bottom: 14px;
+  font-size: 16px;
+}
+
+.frequentBanks div {
+  gap: 16px 10px;
+}
+
+.frequentBanks button {
+  font-size: 13px;
+}
+
+.bankList {
+  margin-top: 16px;
+}
+
+.bankList button {
+  min-height: 70px;
+  font-size: 16px;
+}
+
+.recipientSummary {
+  min-height: 70px;
+}
+
+.recipientSummary span {
+  width: 56px;
+  height: 56px;
+  font-size: 24px;
+}
+
+.recipientSummary strong {
+  font-size: 16px;
+}
+
+.recipientSummary em {
+  font-size: 13px;
+}
+
+.amountFlow {
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.amountCard,
+.remarkCard {
+  padding: 18px;
+  border-radius: 13px;
+}
+
+.amountCard h2,
+.remarkCard h2 {
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+
+.amountCard label {
+  min-height: 60px;
+}
+
+.amountCard label span {
+  font-size: 28px;
+}
+
+.amountCard input {
+  font-size: clamp(25px, 7vw, 34px);
+}
+
+.amountPresets,
+.remarkPresets {
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.amountPresets button,
+.remarkPresets button {
+  min-height: 52px;
+  font-size: 14px;
+}
+
+.confirmFooter {
+  padding: 16px 22px 22px;
+}
+
+.confirmFooter button {
+  min-height: 62px;
+  font-size: 17px;
 }

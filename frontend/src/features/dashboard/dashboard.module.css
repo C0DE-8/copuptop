@@ -506,3 +506,135 @@
     bottom: 84px;
   }
 }
+
+.page {
+  padding-top: 18px;
+  padding-bottom: 92px;
+}
+
+.header {
+  margin-bottom: 18px;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+}
+
+.greeting h1 {
+  font-size: clamp(16px, 3.8vw, 20px);
+}
+
+.headerActions {
+  gap: 8px;
+}
+
+.headerActions button {
+  width: 32px;
+  height: 32px;
+}
+
+.headerActions svg {
+  width: 21px;
+  height: 21px;
+}
+
+.balanceCard {
+  padding: 16px 20px;
+  border-radius: 14px;
+}
+
+.balanceTop {
+  margin-bottom: 12px;
+}
+
+.balanceTop p,
+.balanceTop a,
+.addMoney {
+  font-size: 12px;
+}
+
+.balanceAmount strong {
+  font-size: clamp(22px, 6.8vw, 29px);
+}
+
+.addMoney {
+  min-height: 38px;
+  padding: 0 14px;
+}
+
+.activityCard,
+.quickActions,
+.serviceGrid,
+.promo {
+  margin-top: 12px;
+  border-radius: 13px;
+}
+
+.activityCard {
+  padding: 10px 16px;
+}
+
+.percentIcon {
+  width: 38px;
+  height: 38px;
+  font-size: 22px;
+}
+
+.quickActions {
+  padding: 14px 16px;
+}
+
+.quickActions a,
+.serviceGrid button {
+  gap: 8px;
+  font-size: 12px;
+}
+
+.quickActions a span {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+}
+
+.serviceGrid {
+  row-gap: 18px;
+  padding: 16px 12px 18px;
+}
+
+.serviceGrid button span {
+  width: 46px;
+  height: 46px;
+}
+
+.quickActions svg,
+.serviceGrid svg {
+  width: 23px;
+  height: 23px;
+}
+
+.promo {
+  min-height: 82px;
+  padding: 16px 20px;
+}
+
+.promo strong {
+  font-size: 15px;
+}
+
+.promo span {
+  font-size: 12px;
+}
+
+.security {
+  bottom: 72px;
+}
+
+.security svg {
+  width: 58px;
+  height: 58px;
+}
+
+.security span {
+  font-size: 10px;
+}

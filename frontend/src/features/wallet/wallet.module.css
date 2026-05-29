@@ -171,3 +171,50 @@
     grid-template-columns: 1fr;
   }
 }
+
+.page {
+  padding: 22px;
+}
+
+.header {
+  margin-bottom: 18px;
+}
+
+.header h1 {
+  font-size: 26px;
+}
+
+.header strong {
+  padding: 12px 14px;
+  font-size: 20px;
+}
+
+.layout {
+  gap: 14px;
+}
+
+.form {
+  gap: 13px;
+  padding: 18px;
+}
+
+.form h2,
+.ledger h2 {
+  font-size: 18px;
+}
+
+.form input {
+  height: 40px;
+}
+
+.form button {
+  height: 42px;
+}
+
+.ledger h2 {
+  padding: 12px;
+}
+
+.row {
+  padding: 12px;
+}
