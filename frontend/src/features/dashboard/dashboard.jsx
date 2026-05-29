@@ -1,15 +1,56 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import {
+  FiBell,
+  FiChevronRight,
+  FiCreditCard,
+  FiEye,
+  FiEyeOff,
+  FiGift,
+  FiGrid,
+  FiMaximize,
+  FiMonitor,
+  FiPlus,
+  FiShield,
+  FiSmartphone,
+  FiTrendingUp,
+} from 'react-icons/fi'
+import {
+  RiBankLine,
+  RiHandCoinLine,
+  RiMoneyDollarCircleLine,
+  RiSafe2Line,
+  RiStore2Line,
+  RiWallet3Line,
+} from 'react-icons/ri'
 import { getUserProfile } from '../../api/auth.api'
 import { getBalance } from '../../api/wallet.api'
 import { getTransactions } from '../../api/transaction.api'
 import styles from './dashboard.module.css'
+
+const services = [
+  { label: 'Airtime', icon: FiSmartphone, badge: 'Up to 6%' },
+  { label: 'Data', icon: FiCreditCard },
+  { label: 'Betting', icon: RiMoneyDollarCircleLine },
+  { label: 'TV', icon: FiMonitor },
+  { label: 'SafeBox', icon: RiSafe2Line },
+  { label: 'Loan', icon: RiHandCoinLine },
+  { label: 'BizPayment', icon: RiStore2Line },
+  { label: 'More', icon: FiGrid },
+]
+
+const moneyActions = [
+  { label: 'To OPay', icon: RiWallet3Line, to: '/wallet' },
+  { label: 'To Bank', icon: RiBankLine, to: '/bank' },
+  { label: 'Withdraw', icon: FiTrendingUp, to: '/bank' },
+]
 
 const Dashboard = () => {
   const [profile, setProfile] = useState(null)
   const [wallet, setWallet] = useState(null)
   const [transactions, setTransactions] = useState([])
   const [error, setError] = useState('')
+  const [balanceVisible, setBalanceVisible] = useState(true)
 
   useEffect(() => {
     const loadDashboard = async () => {
@@ -31,63 +72,155 @@ const Dashboard = () => {
     loadDashboard()
   }, [])
 
-  const displayName = profile ? `${profile.firstName} ${profile.lastName}` : 'Copup customer'
+  const firstName = profile?.firstName || 'Copup'
+  const lastName = profile?.lastName || 'customer'
+  const initials = `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase()
+  const currency = wallet?.currency === 'NGN' ? '₦' : wallet?.currency || '₦'
+  const balance = Number(wallet?.balance || 0).toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })
+  const recentTransactions = transactions.slice(0, 2)
 
   return (
     <section className={styles.page}>
       <header className={styles.header}>
-        <div>
-          <p>Copup Bank</p>
-          <h1>Welcome back, {displayName}</h1>
+        <div className={styles.greeting}>
+          <div className={styles.avatar} aria-hidden="true">
+            {initials}
+            <span>3</span>
+          </div>
+          <h1>
+            Hi, {firstName} <span>{lastName}</span>
+          </h1>
         </div>
-        <nav>
-          <Link to="/wallet">Wallet</Link>
-          <Link to="/bank">Bank transfer</Link>
-        </nav>
+        <div className={styles.headerActions} aria-label="Dashboard tools">
+          <button type="button" aria-label="Help">
+            <FiGift />
+            <span>HELP</span>
+          </button>
+          <button type="button" aria-label="Scan">
+            <FiMaximize />
+          </button>
+          <button type="button" aria-label="Notifications">
+            <FiBell />
+            <strong>99+</strong>
+          </button>
+        </div>
       </header>
 
       {error && <p className={styles.error}>{error}</p>}
 
-      <div className={styles.grid}>
-        <article className={styles.balanceCard}>
-          <p>Available balance</p>
-          <strong>
-            {wallet?.currency || 'NGN'} {Number(wallet?.balance || 0).toLocaleString()}
-          </strong>
-          <span>Ledger balance: {Number(wallet?.ledgerBalance || 0).toLocaleString()}</span>
-        </article>
-
-        <article className={styles.card}>
-          <p>Wallet status</p>
-          <strong>{wallet?.status || 'Loading'}</strong>
-          <span>Balances are read from the backend only.</span>
-        </article>
-
-        <article className={styles.card}>
-          <p>Recent activity</p>
-          <strong>{transactions.length}</strong>
-          <span>Latest ledger entries</span>
-        </article>
-      </div>
-
-      <section className={styles.table}>
-        <div className={styles.tableHeader}>
-          <h2>Recent ledger</h2>
-          <Link to="/wallet">View wallet</Link>
+      <article className={styles.balanceCard}>
+        <div className={styles.balanceTop}>
+          <p>
+            <FiShield />
+            Available Balance
+          </p>
+          <Link to="/transactions">
+            Transaction History <FiChevronRight />
+          </Link>
         </div>
+        <div className={styles.balanceBottom}>
+          <button
+            className={styles.balanceAmount}
+            type="button"
+            onClick={() => setBalanceVisible((current) => !current)}
+            aria-label={balanceVisible ? 'Hide balance' : 'Show balance'}
+          >
+            <strong>{balanceVisible ? `${currency}${balance}` : '****'}</strong>
+            <FiChevronRight />
+          </button>
+          <button
+            className={styles.eyeButton}
+            type="button"
+            onClick={() => setBalanceVisible((current) => !current)}
+            aria-label={balanceVisible ? 'Hide balance' : 'Show balance'}
+          >
+            {balanceVisible ? <FiEye /> : <FiEyeOff />}
+          </button>
+          <Link className={styles.addMoney} to="/wallet">
+            <FiPlus /> Add Money
+          </Link>
+        </div>
+      </article>
 
-        {transactions.slice(0, 6).map((item) => (
-          <div className={styles.row} key={item.reference}>
-            <span>{item.description || item.entryType}</span>
-            <strong className={item.entryType === 'credit' ? styles.credit : styles.debit}>
-              {item.entryType === 'credit' ? '+' : '-'}
-              {item.currency} {Number(item.amount).toLocaleString()}
-            </strong>
-          </div>
-        ))}
+      {balanceVisible && (
+        <section className={styles.activityCard} aria-label="Recent wallet activity">
+          {recentTransactions.map((item) => {
+            const isCredit = item.entryType === 'credit'
 
-        {transactions.length === 0 && <p className={styles.empty}>No ledger activity yet.</p>}
+            return (
+              <div className={styles.activityRow} key={item.reference}>
+                <div className={styles.percentIcon} aria-hidden="true">
+                  %
+                </div>
+                <div>
+                  <strong>{item.description || (isCredit ? 'Wallet Credit' : 'Wallet Debit')}</strong>
+                  <span>{item.createdAt ? new Date(item.createdAt).toLocaleString() : item.reference}</span>
+                </div>
+                <p className={isCredit ? styles.credit : styles.debit}>
+                  {isCredit ? '+' : '-'}
+                  {item.currency === 'NGN' ? '₦' : item.currency}
+                  {Number(item.amount).toLocaleString()}
+                  <span>{item.status || 'Successful'}</span>
+                </p>
+              </div>
+            )
+          })}
+          {recentTransactions.length === 0 && <p className={styles.empty}>No wallet activity yet.</p>}
+        </section>
+      )}
+
+      <section className={styles.quickActions} aria-label="Money actions">
+        {moneyActions.map((item) => {
+          const Icon = item.icon
+
+          return (
+            <Link to={item.to} key={item.label}>
+              <span>
+                <Icon />
+              </span>
+              {item.label}
+            </Link>
+          )
+        })}
       </section>
+
+      <section className={styles.serviceGrid} aria-label="Services">
+        {services.map((item) => {
+          const Icon = item.icon
+
+          return (
+            <button type="button" key={item.label}>
+              {item.badge && <em>{item.badge}</em>}
+              <span>
+                <Icon />
+              </span>
+              {item.label}
+            </button>
+          )
+        })}
+      </section>
+
+      <section className={styles.promo}>
+        <FiGift />
+        <div>
+          <strong>Cash up for grabs!</strong>
+          <span>Invite friends and earn up to ₦5,600 Bonus</span>
+        </div>
+        <div className={styles.dots} aria-hidden="true">
+          <span />
+          <span />
+          <span />
+          <span />
+        </div>
+      </section>
+
+      <button className={styles.security} type="button">
+        <FiShield />
+        <span>Click for Security</span>
+      </button>
     </section>
   )
 }

@@ -12,14 +12,37 @@ const Wallet = () => {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
-  const loadWallet = async () => {
+  const refreshWallet = async () => {
     const [walletResult, ledgerResult] = await Promise.all([getWallet(), getTransactions()])
     setWallet(walletResult.data.wallet)
     setLedger(ledgerResult.data.ledger || [])
   }
 
   useEffect(() => {
-    loadWallet().catch((err) => setError(err.response?.data?.message || 'Unable to load wallet'))
+    let active = true
+
+    const loadWallet = async () => {
+      try {
+        const [walletResult, ledgerResult] = await Promise.all([getWallet(), getTransactions()])
+
+        if (!active) {
+          return
+        }
+
+        setWallet(walletResult.data.wallet)
+        setLedger(ledgerResult.data.ledger || [])
+      } catch (err) {
+        if (active) {
+          setError(err.response?.data?.message || 'Unable to load wallet')
+        }
+      }
+    }
+
+    loadWallet()
+
+    return () => {
+      active = false
+    }
   }, [])
 
   const handleChange = (event) => {
@@ -41,7 +64,7 @@ const Wallet = () => {
       })
       setMessage('Transfer completed')
       setForm({ recipientEmail: '', amount: '', description: '' })
-      await loadWallet()
+      await refreshWallet()
     } catch (err) {
       setError(err.response?.data?.message || 'Unable to transfer funds')
     } finally {

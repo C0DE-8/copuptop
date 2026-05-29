@@ -4,15 +4,15 @@
   flex-direction: column;
   gap: 24px;
   padding: 22px;
-  border-right: 1px solid #e5e7eb;
-  background: #ffffff;
+  border-right: 1px solid #27272a;
+  background: #111111;
 }
 
 .brand {
   display: flex;
   align-items: center;
   gap: 12px;
-  color: #111827;
+  color: #f8fafc;
   text-decoration: none;
 }
 
@@ -23,9 +23,9 @@
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  background: #111827;
-  color: #ffffff;
-  font-weight: 900;
+  background: #28d0a8;
+  color: #101010;
+  font-weight: 950;
 }
 
 .brand strong {
@@ -39,61 +39,94 @@
 
 .sidebar nav a,
 .sidebar button {
-  min-height: 42px;
+  min-height: 44px;
   display: flex;
   align-items: center;
+  gap: 10px;
   padding: 0 12px;
   border: 0;
   border-radius: 8px;
   background: transparent;
-  color: #334155;
+  color: #a1a1aa;
   font: inherit;
-  font-weight: 800;
+  font-weight: 850;
   text-align: left;
   text-decoration: none;
   cursor: pointer;
 }
 
+.sidebar nav svg,
+.sidebar button svg {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+}
+
 .sidebar nav a:hover,
+.sidebar nav a.active,
 .sidebar button:hover {
-  background: #eef3f8;
-  color: #111827;
+  background: #252525;
+  color: #28d0a8;
 }
 
 .sidebar button {
   margin-top: auto;
 }
 
+.mobileNav {
+  display: none;
+}
+
 @media (max-width: 760px) {
   .sidebar {
-    min-height: auto;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    flex-direction: row;
-    align-items: center;
-    gap: 12px;
-    padding: 12px;
+    min-height: 0;
+    display: block;
+    padding: 0;
+    border: 0;
+    background: transparent;
   }
 
-  .brand strong {
+  .brand,
+  .sidebar > nav,
+  .sidebar > button {
     display: none;
   }
 
-  .sidebar nav {
-    display: flex;
-    flex: 1;
-    gap: 4px;
+  .mobileNav {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 50;
+    height: 74px;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    align-items: center;
+    padding: 7px 14px max(7px, env(safe-area-inset-bottom));
+    border-top: 1px solid #191919;
+    background: #0f0f0f;
   }
 
-  .sidebar nav a,
-  .sidebar button {
-    min-height: 36px;
-    padding: 0 8px;
-    font-size: 14px;
+  .mobileNav a {
+    min-width: 0;
+    height: 58px;
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    gap: 3px;
+    color: #a6a6a6;
+    font-size: 13px;
+    font-weight: 850;
+    line-height: 1.1;
+    text-decoration: none;
   }
 
-  .sidebar button {
-    margin-top: 0;
+  .mobileNav svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  .mobileNav a.active {
+    color: #28d0a8;
   }
 }

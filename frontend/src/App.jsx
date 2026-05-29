@@ -3,6 +3,7 @@ import Login from './features/auth/login'
 import Register from './features/auth/register'
 import Dashboard from './features/dashboard/dashboard'
 import Wallet from './features/wallet/wallet'
+import Transactions from './features/transactions/transactions'
 import Bank from './features/bank/bank'
 import AppShell from './components/app-shell'
 import ProtectedRoute, { isAuthenticated } from './routes/protected-route'
@@ -15,6 +16,7 @@ const App = () => (
       <Route element={<AppShell />}>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/wallet" element={<Wallet />} />
+        <Route path="/transactions" element={<Transactions />} />
         <Route path="/bank" element={<Bank />} />
       </Route>
     </Route>
