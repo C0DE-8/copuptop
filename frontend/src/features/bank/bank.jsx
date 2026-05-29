@@ -9,6 +9,7 @@ import {
   FiX,
 } from 'react-icons/fi'
 import { getBanks, resolveBankAccount, transferToBank } from '../../api/bank.api'
+import { getWallet } from '../../api/wallet.api'
 import styles from './bank.module.css'
 
 const frequentBanks = ['OPay', 'Access Bank', 'United Bank For Africa', 'First Bank Of Nigeria', 'Guaranty Trust Bank', 'Zenith Bank']
@@ -22,6 +23,7 @@ const recentRecipients = [
 const Bank = () => {
   const navigate = useNavigate()
   const [banks, setBanks] = useState([])
+  const [wallet, setWallet] = useState(null)
   const [bankSearch, setBankSearch] = useState('')
   const [activeTab, setActiveTab] = useState('recents')
   const [showBankPicker, setShowBankPicker] = useState(false)
@@ -45,10 +47,11 @@ const Bank = () => {
 
     const loadBanks = async () => {
       try {
-        const response = await getBanks('NG')
+        const [banksResponse, walletResponse] = await Promise.all([getBanks('NG'), getWallet()])
 
         if (active) {
-          setBanks(response.data.banks || [])
+          setBanks(banksResponse.data.banks || [])
+          setWallet(walletResponse.data.wallet || null)
         }
       } catch (err) {
         if (active) {
@@ -138,9 +141,10 @@ const Bank = () => {
   const selectedBank = banks.find((bank) => bank.code === form.bankCode)
   const accountNumber = form.accountNumber.trim()
   const amount = Number(form.amount)
+  const walletBalance = Number(wallet?.balance || 0)
   const hasResolvedAccount = Boolean(form.accountName)
   const canContinue = form.bankCode && accountNumber.length === 10 && hasResolvedAccount
-  const canSubmit = canContinue && amount > 0
+  const canSubmit = canContinue && amount > 0 && amount <= walletBalance
 
   const handleChange = (event) => {
     const { name, value } = event.target
@@ -177,8 +181,18 @@ const Bank = () => {
     setError('')
     setResult(null)
 
-    if (!canSubmit) {
+    if (!canContinue) {
+      setError('Confirm the recipient account before continuing.')
+      return
+    }
+
+    if (!amount || amount <= 0) {
       setError('Enter amount after the recipient account has been confirmed.')
+      return
+    }
+
+    if (amount > walletBalance) {
+      setError('Insufficient wallet balance')
       return
     }
 
@@ -192,7 +206,7 @@ const Bank = () => {
         amount,
         narration: form.narration.trim() || 'Copup Bank transfer',
       })
-      setResult(response.data)
+      setResult(response.data || response)
     } catch (err) {
       setError(err.response?.data?.message || 'Unable to submit bank transfer')
     } finally {
@@ -303,6 +317,9 @@ const Bank = () => {
                 autoFocus
               />
             </label>
+            <p className={styles.balanceHint}>
+              Balance: ₦{walletBalance.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+            </p>
             <div className={styles.amountPresets}>
               {[500, 1000, 2000, 5000, 9999, 10000].map((value) => (
                 <button
@@ -337,6 +354,7 @@ const Bank = () => {
             </div>
           </section>
 
+          {amount > walletBalance && <p className={styles.error}>Insufficient wallet balance</p>}
           {error && <p className={styles.error}>{error}</p>}
           {result && <p className={styles.success}>Transfer submitted with reference {result.reference}</p>}
 

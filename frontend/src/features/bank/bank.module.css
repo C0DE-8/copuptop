@@ -626,6 +626,12 @@
   color: #818181;
 }
 
+.balanceHint {
+  margin: 10px 0 0;
+  color: #9ca3af;
+  font-size: 13px;
+}
+
 .amountPresets,
 .remarkPresets {
   display: grid;

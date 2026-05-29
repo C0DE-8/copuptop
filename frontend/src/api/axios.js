@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const apiClient = axios.create({
-  baseURL:'http://localhost:1159/api',
+  baseURL:'https://api.movie.copupbid.com/api',
   headers: {
     'Content-Type': 'application/json',
   },
