@@ -117,9 +117,20 @@ router.get('/ledger', requireAuth, async (req, res, next) => {
         const [rows] = await db.execute(
             `SELECT l.reference, l.entry_group AS entryGroup, l.entry_type AS entryType,
                     l.amount, l.currency, l.balance_after AS balanceAfter,
-                    l.description, l.created_at AS createdAt
+                    l.description, l.created_at AS createdAt,
+                    cp_user.first_name AS counterpartyFirstName,
+                    cp_user.last_name AS counterpartyLastName,
+                    cp_user.email AS counterpartyEmail,
+                    cp_user.phone AS counterpartyPhone,
+                    bt.account_name AS bankAccountName,
+                    bt.account_number AS bankAccountNumber,
+                    bt.bank_code AS bankCode,
+                    bt.narration AS bankNarration
              FROM wallet_ledger l
              INNER JOIN wallets w ON w.id = l.wallet_id
+             LEFT JOIN wallets cp_wallet ON cp_wallet.id = l.counterparty_wallet_id
+             LEFT JOIN users cp_user ON cp_user.id = cp_wallet.user_id
+             LEFT JOIN bank_transfers bt ON bt.transaction_id = l.transaction_id
              WHERE w.user_id = ? AND w.currency = ?
              ORDER BY l.id DESC
              LIMIT ?`,

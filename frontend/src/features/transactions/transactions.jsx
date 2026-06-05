@@ -1,23 +1,17 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
-  FiArrowDown,
   FiArrowLeft,
-  FiArrowRight,
   FiCheck,
   FiChevronDown,
   FiChevronRight,
   FiCopy,
   FiDownload,
-  FiGift,
-  FiHelpCircle,
   FiRefreshCw,
   FiShare2,
-  FiShoppingBag,
-  FiSmartphone,
   FiUser,
 } from 'react-icons/fi'
-import { RiHandCoinLine } from 'react-icons/ri'
+import { FaArrowDown, FaArrowUp, FaGift, FaMobileAlt, FaPercent, FaPiggyBank, FaStore } from 'react-icons/fa'
 import { getWallet } from '../../api/wallet.api'
 import { getTransactions } from '../../api/transaction.api'
 import styles from './transactions.module.css'
@@ -50,25 +44,99 @@ const formatDate = (value) => {
 }
 
 const formatMonth = (value) =>
-  new Date(value || Date.now()).toLocaleString(undefined, { month: 'long', year: 'numeric' })
+  new Date(value || Date.now()).toLocaleString(undefined, { month: 'short', year: 'numeric' })
+
+const compactName = (value) =>
+  String(value || '')
+    .trim()
+    .replace(/\s+/g, ' ')
+    .toUpperCase()
+
+const maskAccount = (value) => {
+  const text = String(value || '').replace(/\D/g, '')
+
+  if (text.length < 6) {
+    return text
+  }
+
+  return `${text.slice(0, 3)}****${text.slice(-3)}`
+}
+
+const getCounterpartyName = (item) => {
+  const bankName = compactName(item.bankAccountName)
+  const walletName = compactName(`${item.counterpartyFirstName || ''} ${item.counterpartyLastName || ''}`)
+
+  if (bankName) {
+    return bankName
+  }
+
+  if (walletName) {
+    return walletName
+  }
+
+  const description = String(item.description || '')
+  const match = description.match(/transfer\s+(?:to|from)\s+(.+)/i)
+
+  if (match?.[1]) {
+    return compactName(match[1])
+  }
+
+  return ''
+}
+
+const getPaymentLabel = (item) => {
+  if (item.bankAccountName || item.bankAccountNumber) {
+    return 'Opay'
+  }
+
+  if (item.description?.toLowerCase().includes('wealth')) {
+    return 'OWealth'
+  }
+
+  return 'Opay'
+}
+
+const getTransactionTitle = (item) => {
+  const description = String(item.description || '').trim()
+  const descriptionLower = description.toLowerCase()
+  const counterpartyName = getCounterpartyName(item)
+
+  if (counterpartyName && (item.bankAccountName || item.counterpartyFirstName || descriptionLower.includes('transfer'))) {
+    return `Transfer ${item.entryType === 'credit' ? 'from' : 'to'} ${counterpartyName}`
+  }
+
+  if (descriptionLower.includes('airtime')) return 'Airtime'
+  if (descriptionLower.includes('bonus')) return 'Bonus from Airtime Purchase'
+  if (descriptionLower.includes('safebox') && descriptionLower.includes('withdraw')) return 'SafeBox Withdrawal'
+  if (descriptionLower.includes('safebox')) return 'SafeBox Deposit'
+  if (descriptionLower.includes('interest')) return description || 'OWealth Interest Earned'
+  if (descriptionLower.includes('deposit')) return description || 'Spend & Save Deposit'
+
+  return description || (item.entryType === 'credit' ? 'Transfer from Opay account' : 'Transfer to Opay account')
+}
+
+const getPartyDetails = (item) => {
+  const counterpartyName = getCounterpartyName(item)
+  const paymentLabel = getPaymentLabel(item)
+  const account = item.bankAccountNumber || item.counterpartyPhone || item.counterpartyEmail || ''
+  const masked = maskAccount(account)
+
+  if (!counterpartyName) {
+    return item.description || 'Opay'
+  }
+
+  return masked ? `${counterpartyName}\n${paymentLabel} | ${masked}` : `${counterpartyName}\n${paymentLabel}`
+}
 
 const TransactionIcon = ({ item }) => {
   const description = (item.description || '').toLowerCase()
 
-  if (description.includes('airtime')) return <FiSmartphone />
-  if (description.includes('bonus')) return <FiGift />
-  if (description.includes('interest')) return <RiHandCoinLine />
-  if (description.includes('withdraw')) return <FiArrowRight />
-  if (item.entryType === 'credit') return <FiArrowDown />
-  return <FiShoppingBag />
-}
-
-const getTransactionTitle = (item) => {
-  if (item.description) {
-    return item.description
-  }
-
-  return item.entryType === 'credit' ? 'Transfer from Opay account' : 'Transfer to Opay account'
+  if (description.includes('airtime')) return <FaMobileAlt />
+  if (description.includes('bonus')) return <FaGift />
+  if (description.includes('interest') || description.includes('wealth')) return <FaPercent />
+  if (description.includes('safe') || description.includes('save')) return <FaPiggyBank />
+  if (item.bankAccountName || description.includes('transfer')) return item.entryType === 'credit' ? <FaArrowDown /> : <FaArrowUp />
+  return <FaStore />
 }
 
 const Transactions = () => {
@@ -130,6 +198,8 @@ const Transactions = () => {
     const isCredit = selectedTransaction.entryType === 'credit'
     const title = getTransactionTitle(selectedTransaction)
     const amount = formatAmount(selectedTransaction).replace('+', '').replace('-', '')
+    const partyDetails = getPartyDetails(selectedTransaction)
+    const isTransfer = title.toLowerCase().startsWith('transfer')
 
     return (
       <section className={styles.page}>
@@ -159,16 +229,19 @@ const Transactions = () => {
           <dl>
             <div>
               <dt>{isCredit ? 'Credited to' : 'Recipient Details'}</dt>
-              <dd>{isCredit ? 'Available Balance' : 'Opay Wallet'}</dd>
+              <dd>{isCredit ? 'Available Balance' : partyDetails}</dd>
             </div>
-            <div>
-              <dt>{isCredit ? 'Sender Details' : 'Remark'}</dt>
-              <dd>{selectedTransaction.description || 'Wallet transfer'}</dd>
-            </div>
-            <div>
-              <dt>Transaction Type</dt>
-              <dd>{isCredit ? 'Bank Deposit' : 'Wallet Transfer'}</dd>
-            </div>
+            {isCredit ? (
+              <div>
+                <dt>Sender Details</dt>
+                <dd>{partyDetails}</dd>
+              </div>
+            ) : (
+              <div>
+                <dt>Remark</dt>
+                <dd>{selectedTransaction.bankNarration || selectedTransaction.description || 'Purchase'}</dd>
+              </div>
+            )}
             <div>
               <dt>Transaction No.</dt>
               <dd>
@@ -177,16 +250,30 @@ const Transactions = () => {
               </dd>
             </div>
             <div>
-              <dt>Transaction Date</dt>
-              <dd>{formatDate(selectedTransaction.createdAt)}</dd>
+              <dt>{isCredit ? 'Transaction Date' : 'Payment Method'}</dt>
+              <dd>{isCredit ? formatDate(selectedTransaction.createdAt) : getPaymentLabel(selectedTransaction)}</dd>
             </div>
-            <div>
-              <dt>Session ID</dt>
-              <dd>
-                {(selectedTransaction.reference || '090267260526221139373004507015').slice(0, 30)}
-                <FiCopy />
-              </dd>
-            </div>
+            {!isCredit && (
+              <div>
+                <dt>Transaction Date</dt>
+                <dd>{formatDate(selectedTransaction.createdAt)}</dd>
+              </div>
+            )}
+            {!isTransfer && (
+              <div>
+                <dt>Transaction Type</dt>
+                <dd>{isCredit ? 'Deposit' : 'Debit'}</dd>
+              </div>
+            )}
+            {isCredit && !isTransfer && (
+              <div>
+                <dt>Session ID</dt>
+                <dd>
+                  {(selectedTransaction.reference || '090267260526221139373004507015').slice(0, 30)}
+                  <FiCopy />
+                </dd>
+              </div>
+            )}
           </dl>
         </section>
 
@@ -202,11 +289,9 @@ const Transactions = () => {
             <button type="button">
               <FiRefreshCw /> {isCredit ? 'Transfer Back' : 'Transfer Again'}
             </button>
-            {!isCredit && (
-              <button type="button">
-                <FiDownload /> View Records
-              </button>
-            )}
+            <button type="button">
+              <FiDownload /> View Records
+            </button>
           </div>
         </section>
 
@@ -252,17 +337,6 @@ const Transactions = () => {
       </div>
 
       {error && <p className={styles.error}>{error}</p>}
-
-      <section className={styles.alertBanner}>
-        <div>
-          <strong>No transaction alerts?</strong>
-          <span>Activate SMS alerts to get instant notifications for every transaction.</span>
-          <button type="button">
-            Activate Now <FiArrowRight />
-          </button>
-        </div>
-        <FiHelpCircle />
-      </section>
 
       <section className={styles.historyCard}>
         <div className={styles.monthHeader}>

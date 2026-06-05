@@ -7,7 +7,6 @@
 
 .topbar,
 .filters,
-.alertBanner,
 .historyCard,
 .detailHero,
 .detailCard,
@@ -96,68 +95,11 @@
   transform: translateY(-50%);
 }
 
-.alertBanner {
-  min-height: 154px;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 18px;
-  align-items: center;
-  margin-top: 18px;
-  padding: 20px;
-  overflow: hidden;
-  border-radius: 14px;
-  background:
-    radial-gradient(circle at 78% 38%, #ffd64d 0 22%, transparent 23%),
-    linear-gradient(135deg, #fff5c8, #ffe9a0);
-  color: #25221a;
-}
-
-.alertBanner strong,
-.alertBanner span {
-  display: block;
-}
-
-.alertBanner strong {
-  font-size: 21px;
-  font-weight: 950;
-}
-
-.alertBanner span {
-  max-width: 380px;
-  margin-top: 4px;
-  color: #4b463b;
-  font-size: 15px;
-  font-weight: 700;
-}
-
-.alertBanner button {
-  min-height: 45px;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 14px;
-  padding: 0 22px;
-  border: 0;
-  border-radius: 999px;
-  background: #26231d;
-  color: #ffffff;
-  font: inherit;
-  font-weight: 900;
-  cursor: pointer;
-}
-
-.alertBanner > svg {
-  width: 82px;
-  height: 82px;
-  color: #151515;
-  opacity: 0.88;
-}
-
 .historyCard,
 .detailHero,
 .detailCard,
 .actionsCard {
-  margin-top: 18px;
+  margin-top: 16px;
   border-radius: 16px;
   background: #2b2b2b;
 }
@@ -218,7 +160,7 @@
   grid-template-columns: auto minmax(0, 1fr) auto;
   gap: 14px;
   align-items: center;
-  padding: 14px 0;
+  padding: 13px 0;
   border: 0;
   background: transparent;
   color: inherit;
@@ -239,7 +181,7 @@
 .historyRow strong {
   overflow: hidden;
   color: #ffffff;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 650;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -394,6 +336,7 @@
   font-weight: 500;
   text-align: right;
   overflow-wrap: anywhere;
+  white-space: pre-line;
 }
 
 .detailCard dd svg,
@@ -453,7 +396,7 @@
   background: #104735;
   color: #28d0a8;
   font: inherit;
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 900;
   cursor: pointer;
 }
@@ -500,15 +443,6 @@
 
   .filters {
     gap: 16px;
-  }
-
-  .alertBanner {
-    min-height: 154px;
-  }
-
-  .alertBanner > svg {
-    width: 66px;
-    height: 66px;
   }
 
   .historyCard {
@@ -566,32 +500,6 @@
 .filters select {
   height: 42px;
   font-size: 13px;
-}
-
-.alertBanner {
-  min-height: 118px;
-  margin-top: 12px;
-  padding: 16px;
-}
-
-.alertBanner strong {
-  font-size: 17px;
-}
-
-.alertBanner span {
-  font-size: 13px;
-}
-
-.alertBanner button {
-  min-height: 38px;
-  margin-top: 10px;
-  padding: 0 16px;
-  font-size: 13px;
-}
-
-.alertBanner > svg {
-  width: 60px;
-  height: 60px;
 }
 
 .historyCard,
