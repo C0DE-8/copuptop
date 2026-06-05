@@ -6,6 +6,7 @@ import Dashboard from './features/dashboard/dashboard'
 import Wallet from './features/wallet/wallet'
 import Transactions from './features/transactions/transactions'
 import Bank from './features/bank/bank'
+import Me from './features/me/me'
 import AppShell from './components/app-shell'
 import ProtectedRoute, { isAuthenticated } from './routes/protected-route'
 import logo from './assets/logo.png'
@@ -105,6 +106,7 @@ const App = () => (
           <Route path="/wallet" element={<Wallet />} />
           <Route path="/transactions" element={<Transactions />} />
           <Route path="/bank" element={<Bank />} />
+          <Route path="/me" element={<Me />} />
         </Route>
       </Route>
       <Route path="*" element={<Navigate to={isAuthenticated() ? '/dashboard' : '/'} replace />} />

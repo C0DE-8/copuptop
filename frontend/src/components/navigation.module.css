@@ -68,10 +68,6 @@
   margin-top: auto;
 }
 
-.mobileNav {
-  display: none;
-}
-
 @media (max-width: 760px) {
   .sidebar {
     min-height: 0;
@@ -85,43 +81,5 @@
   .sidebar > nav,
   .sidebar > button {
     display: none;
-  }
-
-  .mobileNav {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 50;
-    height: 64px;
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    align-items: center;
-    padding: 5px 14px max(5px, env(safe-area-inset-bottom));
-    border-top: 1px solid #191919;
-    background: #0f0f0f;
-  }
-
-  .mobileNav a {
-    min-width: 0;
-    height: 50px;
-    display: grid;
-    justify-items: center;
-    align-content: center;
-    gap: 3px;
-    color: #a6a6a6;
-    font-size: 12px;
-    font-weight: 850;
-    line-height: 1.1;
-    text-decoration: none;
-  }
-
-  .mobileNav svg {
-    width: 23px;
-    height: 23px;
-  }
-
-  .mobileNav a.active {
-    color: #28d0a8;
   }
 }

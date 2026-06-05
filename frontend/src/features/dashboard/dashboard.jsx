@@ -1,48 +1,43 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { FiChevronRight, FiEye, FiEyeOff, FiPlus, FiShield } from 'react-icons/fi'
 import {
-  FiBell,
-  FiChevronRight,
-  FiCreditCard,
-  FiEye,
-  FiEyeOff,
-  FiGift,
-  FiGrid,
-  FiMaximize,
-  FiMonitor,
-  FiPlus,
-  FiShield,
-  FiSmartphone,
-  FiTrendingUp,
-} from 'react-icons/fi'
-import {
-  RiBankLine,
-  RiHandCoinLine,
-  RiMoneyDollarCircleLine,
-  RiSafe2Line,
-  RiStore2Line,
-  RiWallet3Line,
-} from 'react-icons/ri'
+  FaBell,
+  FaChartBar,
+  FaDice,
+  FaExpand,
+  FaGift,
+  FaHandHoldingUsd,
+  FaMobileAlt,
+  FaPiggyBank,
+  FaRegCommentDots,
+  FaShieldAlt,
+  FaStore,
+  FaThLarge,
+  FaTv,
+  FaUniversity,
+  FaWallet,
+} from 'react-icons/fa'
 import { getUserProfile } from '../../api/auth.api'
 import { getBalance } from '../../api/wallet.api'
 import { getTransactions } from '../../api/transaction.api'
 import styles from './dashboard.module.css'
 
 const services = [
-  { label: 'Airtime', icon: FiSmartphone, badge: 'Up to 6%' },
-  { label: 'Data', icon: FiCreditCard },
-  { label: 'Betting', icon: RiMoneyDollarCircleLine },
-  { label: 'TV', icon: FiMonitor },
-  { label: 'SafeBox', icon: RiSafe2Line },
-  { label: 'Loan', icon: RiHandCoinLine },
-  { label: 'BizPayment', icon: RiStore2Line },
-  { label: 'More', icon: FiGrid },
+  { label: 'Airtime', icon: FaChartBar, badge: 'Up to 6%' },
+  { label: 'Data', icon: FaMobileAlt },
+  { label: 'Betting', icon: FaDice },
+  { label: 'TV', icon: FaTv },
+  { label: 'SafeBox', icon: FaPiggyBank },
+  { label: 'Loan', icon: FaHandHoldingUsd },
+  { label: 'BizPayment', icon: FaStore },
+  { label: 'More', icon: FaThLarge },
 ]
 
 const moneyActions = [
-  { label: 'To OPay', icon: RiWallet3Line, to: '/wallet' },
-  { label: 'To Bank', icon: RiBankLine, to: '/bank' },
-  { label: 'Withdraw', icon: FiTrendingUp, to: '/bank' },
+  { label: 'To OPay', icon: FaRegCommentDots, to: '/wallet' },
+  { label: 'To Bank', icon: FaUniversity, to: '/bank' },
+  { label: 'Withdraw', icon: FaWallet, to: '/bank' },
 ]
 
 const Dashboard = () => {
@@ -96,14 +91,14 @@ const Dashboard = () => {
         </div>
         <div className={styles.headerActions} aria-label="Dashboard tools">
           <button type="button" aria-label="Help">
-            <FiGift />
+            <FaGift />
             <span>HELP</span>
           </button>
           <button type="button" aria-label="Scan">
-            <FiMaximize />
+            <FaExpand />
           </button>
           <button type="button" aria-label="Notifications">
-            <FiBell />
+            <FaBell />
             <strong>99+</strong>
           </button>
         </div>
@@ -116,6 +111,14 @@ const Dashboard = () => {
           <p>
             <FiShield />
             Available Balance
+            <button
+              className={styles.eyeButton}
+              type="button"
+              onClick={() => setBalanceVisible((current) => !current)}
+              aria-label={balanceVisible ? 'Hide balance' : 'Show balance'}
+            >
+              {balanceVisible ? <FiEye /> : <FiEyeOff />}
+            </button>
           </p>
           <Link to="/transactions">
             Transaction History <FiChevronRight />
@@ -130,14 +133,6 @@ const Dashboard = () => {
           >
             <strong>{balanceVisible ? `${currency}${balance}` : '****'}</strong>
             <FiChevronRight />
-          </button>
-          <button
-            className={styles.eyeButton}
-            type="button"
-            onClick={() => setBalanceVisible((current) => !current)}
-            aria-label={balanceVisible ? 'Hide balance' : 'Show balance'}
-          >
-            {balanceVisible ? <FiEye /> : <FiEyeOff />}
           </button>
           <Link className={styles.addMoney} to="/wallet">
             <FiPlus /> Add Money
@@ -204,7 +199,7 @@ const Dashboard = () => {
       </section>
 
       <section className={styles.promo}>
-        <FiGift />
+        <FaGift />
         <div>
           <strong>Cash up for grabs!</strong>
           <span>Invite friends and earn up to ₦5,600 Bonus</span>
@@ -218,7 +213,7 @@ const Dashboard = () => {
       </section>
 
       <button className={styles.security} type="button">
-        <FiShield />
+        <FaShieldAlt />
         <span>Click for Security</span>
       </button>
     </section>

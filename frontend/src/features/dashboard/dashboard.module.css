@@ -1,18 +1,18 @@
 .page {
   position: relative;
   min-height: 100vh;
-  padding: 28px clamp(18px, 4vw, 34px) 116px;
-  background: #1a1a1a;
+  padding: 18px clamp(18px, 4vw, 34px) 138px;
+  background: #171717;
   color: #f8fafc;
 }
 
 .page::before {
-  content: "";
   position: fixed;
   inset: 0 auto 0 0;
   width: min(100%, 620px);
   pointer-events: none;
-  background: radial-gradient(circle at 86% 78%, rgba(39, 207, 166, 0.14), transparent 22rem);
+  content: "";
+  background: radial-gradient(circle at 92% 82%, rgba(40, 208, 168, 0.16), transparent 19rem);
 }
 
 .header,
@@ -25,53 +25,53 @@
 .error {
   position: relative;
   z-index: 1;
-  max-width: 620px;
+  width: min(100%, 620px);
   margin-right: auto;
   margin-left: auto;
 }
 
 .header {
   display: flex;
-  justify-content: space-between;
-  gap: 18px;
   align-items: center;
-  margin-bottom: 28px;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 18px;
 }
 
 .greeting {
   min-width: 0;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
 }
 
 .avatar {
   position: relative;
-  width: 48px;
-  height: 48px;
+  width: 42px;
+  height: 42px;
   flex: 0 0 auto;
   display: grid;
   place-items: center;
   border-radius: 50%;
-  border: 2px solid #2dd4bf;
-  background: linear-gradient(135deg, #3f2f26, #a65f3b);
+  border: 2px solid #ee8d5c;
+  background: linear-gradient(135deg, #30221d, #a9603c);
   color: #ffffff;
-  font-size: 14px;
-  font-weight: 900;
+  font-size: 13px;
+  font-weight: 950;
 }
 
 .avatar span {
   position: absolute;
-  right: -4px;
-  bottom: -4px;
-  width: 20px;
-  height: 20px;
+  right: -3px;
+  bottom: -3px;
+  width: 18px;
+  height: 18px;
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: #f7d47a;
-  color: #44331a;
-  font-size: 11px;
+  background: #f1cf77;
+  color: #5f4317;
+  font-size: 10px;
   line-height: 1;
 }
 
@@ -79,8 +79,8 @@
   min-width: 0;
   margin: 0;
   color: #ffffff;
-  font-size: clamp(18px, 4vw, 24px);
-  font-weight: 800;
+  font-size: clamp(16px, 3.8vw, 20px);
+  font-weight: 750;
   line-height: 1.2;
 }
 
@@ -91,47 +91,48 @@
 .headerActions {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 8px;
 }
 
 .headerActions button {
   position: relative;
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   display: grid;
   place-items: center;
   border: 0;
-  border-radius: 8px;
+  border-radius: 10px;
   background: transparent;
-  color: #f8fafc;
+  color: #f2f2f2;
   cursor: pointer;
 }
 
 .headerActions svg {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
 }
 
 .headerActions button span,
 .headerActions button strong {
   position: absolute;
-  top: -5px;
+  top: -7px;
   right: -6px;
-  min-width: 23px;
-  padding: 1px 4px;
+  min-width: 22px;
+  padding: 1px 5px;
   border-radius: 999px;
-  background: #fb7185;
+  background: #fb5f8b;
   color: #ffffff;
   font-size: 9px;
-  font-weight: 900;
-  line-height: 1.4;
+  font-weight: 950;
+  line-height: 1.35;
 }
 
 .balanceCard {
-  padding: 20px 26px 18px;
-  border-radius: 18px;
+  padding: 17px 21px 16px;
+  border-radius: 15px;
   background: #28d0a8;
-  color: #13352f;
+  color: #123c33;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
 }
 
 .balanceTop,
@@ -139,96 +140,124 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
+  gap: 12px;
 }
 
 .balanceTop {
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
 
 .balanceTop p,
 .balanceTop a {
+  min-width: 0;
   display: inline-flex;
   align-items: center;
   gap: 6px;
   margin: 0;
-  color: #14352e;
-  font-size: 14px;
+  color: #173b33;
+  font-size: 13px;
   font-weight: 800;
+  line-height: 1;
   text-decoration: none;
 }
 
-.balanceTop svg {
-  width: 19px;
-  height: 19px;
+.balanceTop p {
+  flex: 1 1 auto;
 }
 
-.balanceAmount,
+.balanceTop a {
+  flex: 0 0 auto;
+  justify-content: flex-end;
+}
+
+.balanceTop svg {
+  width: 18px;
+  height: 18px;
+}
+
 .eyeButton {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  display: inline-grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(17, 61, 51, 0.22);
+  color: #183d35;
+  cursor: pointer;
+}
+
+.eyeButton svg {
+  width: 14px;
+  height: 14px;
+}
+
+.balanceAmount {
+  min-width: 0;
   display: inline-flex;
   align-items: center;
+  gap: 5px;
+  padding: 0;
   border: 0;
   background: transparent;
   color: #14352e;
   cursor: pointer;
 }
 
-.balanceAmount {
-  min-width: 0;
-  gap: 6px;
-  padding: 0;
-}
-
 .balanceAmount strong {
   overflow-wrap: anywhere;
-  font-size: clamp(25px, 8vw, 34px);
+  font-size: clamp(24px, 7vw, 31px);
   font-weight: 950;
+  letter-spacing: 0;
   line-height: 1;
 }
 
-.eyeButton {
-  width: 32px;
-  height: 32px;
-  flex: 0 0 auto;
-  justify-content: center;
-  margin-right: auto;
-  border-radius: 50%;
+.balanceAmount svg {
+  width: 18px;
+  height: 18px;
 }
 
 .addMoney {
-  min-height: 46px;
+  min-height: 40px;
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 0 18px;
+  padding: 0 17px;
   border-radius: 999px;
-  background: #252525;
+  background: #262626;
   color: #28d0a8;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 900;
   text-decoration: none;
+}
+
+.addMoney svg {
+  width: 16px;
+  height: 16px;
 }
 
 .activityCard,
 .quickActions,
 .serviceGrid,
 .promo {
-  margin-top: 18px;
-  border-radius: 16px;
-  background: #2b2b2b;
+  margin-top: 16px;
+  border-radius: 15px;
+  background: #2a2a2a;
 }
 
 .activityCard {
-  padding: 16px 22px;
+  padding: 12px 18px;
 }
 
 .activityRow {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: 14px;
+  gap: 13px;
   align-items: center;
-  padding: 8px 0;
+  padding: 10px 0;
 }
 
 .activityRow + .activityRow {
@@ -236,15 +265,15 @@
 }
 
 .percentIcon {
-  width: 45px;
-  height: 45px;
+  width: 44px;
+  height: 44px;
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: #eadbff;
-  color: #7c3aed;
-  font-size: 26px;
-  font-weight: 900;
+  background: #f5edd7;
+  color: #e5ad37;
+  font-size: 22px;
+  font-weight: 950;
 }
 
 .activityRow strong,
@@ -254,25 +283,27 @@
 
 .activityRow strong {
   color: #ffffff;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 800;
 }
 
 .activityRow div span {
   margin-top: 4px;
-  color: #b7b7b7;
+  color: #a9a9a9;
   font-size: 12px;
 }
 
 .activityRow p {
   margin: 0;
+  color: #ffffff;
   text-align: right;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 950;
 }
 
 .activityRow p span {
   margin-top: 3px;
+  color: #28d0a8;
   font-size: 11px;
   font-weight: 800;
 }
@@ -281,7 +312,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  padding: 18px 20px;
+  padding: 18px 18px 19px;
 }
 
 .quickActions a,
@@ -289,83 +320,92 @@
   min-width: 0;
   display: grid;
   justify-items: center;
-  gap: 12px;
+  gap: 11px;
   border: 0;
   background: transparent;
-  color: #d8d8d8;
+  color: #d7d7d7;
   font: inherit;
-  font-size: 14px;
-  font-weight: 800;
+  font-size: 13px;
+  font-weight: 750;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
 }
 
-.quickActions a span,
-.serviceGrid button span {
-  width: 58px;
-  height: 58px;
+.quickActions a span {
+  width: 56px;
+  height: 56px;
   display: grid;
   place-items: center;
-  border-radius: 18px;
-  background: #1f1f1f;
-  color: #22d3a9;
+  border-radius: 15px;
+  background: #202020;
+  color: #28d0a8;
 }
 
-.quickActions svg,
-.serviceGrid svg {
-  width: 28px;
-  height: 28px;
+.quickActions svg {
+  width: 27px;
+  height: 27px;
 }
 
 .serviceGrid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  row-gap: 24px;
-  column-gap: 10px;
-  padding: 20px 14px 24px;
+  row-gap: 22px;
+  column-gap: 8px;
+  padding: 20px 12px 22px;
 }
 
 .serviceGrid button {
   position: relative;
+  gap: 10px;
 }
 
 .serviceGrid button span {
-  width: 54px;
-  height: 54px;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
   border-radius: 50%;
-  color: #ffffff;
+  background: #202020;
+  color: #f7f7f7;
+}
+
+.serviceGrid svg {
+  width: 22px;
+  height: 22px;
 }
 
 .serviceGrid button em {
   position: absolute;
-  top: -14px;
+  top: -13px;
   left: 50%;
   z-index: 1;
-  transform: translateX(-22%);
+  transform: translateX(-16%);
   padding: 2px 7px;
   border-radius: 999px;
-  background: #fb7185;
+  background: #f65f87;
   color: #ffffff;
   font-size: 9px;
   font-style: normal;
-  font-weight: 900;
+  font-weight: 950;
+  line-height: 1.25;
   white-space: nowrap;
 }
 
 .promo {
-  min-height: 102px;
+  min-height: 96px;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
-  gap: 18px;
+  gap: 16px;
   align-items: center;
-  padding: 20px 24px;
+  padding: 18px 22px;
+  overflow: hidden;
 }
 
 .promo > svg {
-  width: 34px;
-  height: 34px;
-  color: #20d1aa;
+  width: 35px;
+  height: 35px;
+  color: #28d0a8;
   transform: rotate(-18deg);
 }
 
@@ -376,14 +416,14 @@
 
 .promo strong {
   color: #ffffff;
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 950;
 }
 
 .promo span {
   margin-top: 4px;
   color: #c7c7c7;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .dots {
@@ -399,21 +439,21 @@
   width: 5px;
   height: 5px;
   border-radius: 999px;
-  background: #747474;
+  background: #6b6b6b;
 }
 
 .dots span:first-child {
-  width: 19px;
+  width: 18px;
   background: #eeeeee;
 }
 
 .security {
   position: fixed;
-  right: max(16px, calc((100vw - 620px) / 2));
-  bottom: 86px;
+  right: max(-8px, calc((100vw - 620px) / 2 - 10px));
+  bottom: calc(78px + env(safe-area-inset-bottom));
   display: grid;
   justify-items: center;
-  gap: 4px;
+  gap: 2px;
   border: 0;
   background: transparent;
   color: #ffffff;
@@ -421,31 +461,31 @@
 }
 
 .security svg {
-  width: 72px;
-  height: 72px;
-  padding: 10px;
-  border-radius: 22px;
-  background: #6af0d0;
+  width: 62px;
+  height: 62px;
+  padding: 12px;
+  border-radius: 21px;
+  background: #79f3d6;
   color: #ffffff;
-  filter: drop-shadow(0 0 18px rgba(35, 211, 169, 0.7));
+  filter: drop-shadow(0 0 16px rgba(35, 211, 169, 0.7));
 }
 
 .security span {
-  padding: 6px 10px;
+  padding: 5px 9px;
   border-radius: 999px;
-  border: 2px solid rgba(255, 255, 255, 0.78);
+  border: 2px solid rgba(255, 255, 255, 0.82);
   background: #28d0a8;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 950;
   white-space: nowrap;
 }
 
 .credit {
-  color: #25d0a8;
+  color: #28d0a8;
 }
 
 .debit {
-  color: #fb7185;
+  color: #ffffff;
 }
 
 .empty,
@@ -469,7 +509,11 @@
 
 @media (min-width: 761px) {
   .page {
-    padding-bottom: 40px;
+    padding-bottom: 70px;
+  }
+
+  .security {
+    bottom: 44px;
   }
 }
 
@@ -479,180 +523,18 @@
     padding-left: 22px;
   }
 
-  .headerActions {
-    gap: 8px;
-  }
-
-  .balanceCard {
-    padding: 18px 26px;
-  }
-
-  .balanceTop a,
-  .balanceTop p {
-    font-size: 13px;
+  .balanceTop p,
+  .balanceTop a {
+    font-size: 12px;
   }
 
   .balanceBottom {
-    flex-wrap: wrap;
+    gap: 10px;
   }
 
   .addMoney {
-    min-height: 42px;
-    margin-left: auto;
-  }
-
-  .security {
-    right: -10px;
-    bottom: 84px;
-  }
-}
-
-.page {
-  padding-top: 18px;
-  padding-bottom: 92px;
-}
-
-.header {
-  margin-bottom: 18px;
-}
-
-.avatar {
-  width: 42px;
-  height: 42px;
-}
-
-.greeting h1 {
-  font-size: clamp(16px, 3.8vw, 20px);
-}
-
-.headerActions {
-  gap: 8px;
-}
-
-.headerActions button {
-  width: 32px;
-  height: 32px;
-}
-
-.headerActions svg {
-  width: 21px;
-  height: 21px;
-}
-
-.balanceCard {
-  padding: 16px 20px;
-  border-radius: 14px;
-}
-
-.balanceTop {
-  margin-bottom: 12px;
-}
-
-.balanceTop p,
-.balanceTop a,
-.addMoney {
-  font-size: 12px;
-}
-
-.balanceAmount strong {
-  font-size: clamp(22px, 6.8vw, 29px);
-}
-
-.addMoney {
-  min-height: 38px;
-  padding: 0 14px;
-}
-
-.activityCard,
-.quickActions,
-.serviceGrid,
-.promo {
-  margin-top: 12px;
-  border-radius: 13px;
-}
-
-.activityCard {
-  padding: 10px 16px;
-}
-
-.percentIcon {
-  width: 38px;
-  height: 38px;
-  font-size: 22px;
-}
-
-.quickActions {
-  padding: 14px 16px;
-}
-
-.quickActions a,
-.serviceGrid button {
-  gap: 8px;
-  font-size: 12px;
-}
-
-.quickActions a span {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
-}
-
-.serviceGrid {
-  row-gap: 18px;
-  padding: 16px 12px 18px;
-}
-
-.serviceGrid button span {
-  width: 46px;
-  height: 46px;
-}
-
-.quickActions svg,
-.serviceGrid svg {
-  width: 23px;
-  height: 23px;
-}
-
-.promo {
-  min-height: 82px;
-  padding: 16px 20px;
-}
-
-.promo strong {
-  font-size: 15px;
-}
-
-.promo span {
-  font-size: 12px;
-}
-
-.security {
-  bottom: 72px;
-}
-
-.security svg {
-  width: 58px;
-  height: 58px;
-}
-
-.security span {
-  font-size: 10px;
-}
-
-.page {
-  padding-bottom: 138px;
-}
-
-.security {
-  bottom: calc(78px + env(safe-area-inset-bottom));
-}
-
-@media (min-width: 761px) {
-  .page {
-    padding-bottom: 70px;
-  }
-
-  .security {
-    bottom: 44px;
+    min-height: 38px;
+    padding: 0 14px;
+    font-size: 12px;
   }
 }
