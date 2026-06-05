@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { registerUser } from '../../api/auth.api'
+import logo from '../../assets/logo.png'
 import styles from './register.module.css'
 
 const Register = () => {
@@ -43,8 +44,8 @@ const Register = () => {
     <main className={styles.page}>
       <section className={styles.panel}>
         <div className={styles.heading}>
-          <span className={styles.mark}>CB</span>
-          <p>Copup Bank</p>
+          <img className={styles.mark} src={logo} alt="Opay" />
+          <p>Opay</p>
           <h1>Create your account</h1>
         </div>
 

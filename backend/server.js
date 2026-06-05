@@ -58,7 +58,7 @@ app.get('/', (req, res) => {
 
     res.json({
         status: true,
-        message: 'Copup Bank API Running'
+        message: 'Opay API Running'
     });
 
 });

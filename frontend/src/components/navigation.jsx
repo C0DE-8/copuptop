@@ -1,6 +1,7 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { FiCreditCard, FiHome, FiMinusCircle, FiPieChart, FiUser } from 'react-icons/fi'
 import { RiCopperCoinLine } from 'react-icons/ri'
+import logo from '../assets/logo.png'
 import styles from './navigation.module.css'
 
 const navItems = [
@@ -24,8 +25,8 @@ const Navigation = () => {
   return (
     <aside className={styles.sidebar}>
       <Link className={styles.brand} to="/dashboard">
-        <span>CB</span>
-        <strong>Copup Bank</strong>
+        <img src={logo} alt="Opay" />
+        <strong>Opay</strong>
       </Link>
       <nav>
         {navItems.slice(0, 3).map((item) => {

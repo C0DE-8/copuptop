@@ -1,9 +1,5 @@
 {
   "appId": "com.copuptop.app",
-  "appName": "CopupTop",
-  "webDir": "dist",
-  "server": {
-    "url": "https://copuptop.vercel.app/",
-    "cleartext": false
-  }
+  "appName": "Opay",
+  "webDir": "dist"
 }

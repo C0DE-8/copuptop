@@ -556,7 +556,7 @@ router.post('/transfer', requireAuth, async (req, res, next) => {
     const bankCode = String(req.body.bankCode || '').trim();
     const accountNumber = String(req.body.accountNumber || '').trim();
     const accountName = req.body.accountName ? String(req.body.accountName).trim().slice(0, 180) : null;
-    const narration = String(req.body.narration || 'Copup Bank transfer').trim().slice(0, 180);
+    const narration = String(req.body.narration || 'Opay transfer').trim().slice(0, 180);
     const reference = String(req.body.reference || makeReference('CUP-BANK')).trim().slice(0, 80);
 
     const missingFields = [];

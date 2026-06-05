@@ -23,6 +23,16 @@ apiClient.interceptors.response.use(
   (error) => {
     const status = error.response?.status
 
+    if (!error.response) {
+      error.response = {
+        data: {
+          message: navigator.onLine
+            ? 'Unable to reach Opay right now. Please try again.'
+            : 'Connection unavailable. Please check your network.',
+        },
+      }
+    }
+
     if (status === 401) {
       localStorage.removeItem('copup_access_token')
       localStorage.removeItem('copup_refresh_token')

@@ -204,7 +204,7 @@ const Bank = () => {
         accountNumber,
         accountName: form.accountName.trim(),
         amount,
-        narration: form.narration.trim() || 'Copup Bank transfer',
+        narration: form.narration.trim() || 'Opay transfer',
       })
       setResult(response.data || response)
     } catch (err) {

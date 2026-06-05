@@ -77,7 +77,7 @@ const Wallet = () => {
       <header className={styles.header}>
         <div>
           <p>Wallet</p>
-          <h1>Move money between Copup accounts</h1>
+          <h1>Move money between Opay accounts</h1>
         </div>
         <strong>
           {wallet?.currency || 'NGN'} {Number(wallet?.balance || 0).toLocaleString()}

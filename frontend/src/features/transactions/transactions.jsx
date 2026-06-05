@@ -68,7 +68,7 @@ const getTransactionTitle = (item) => {
     return item.description
   }
 
-  return item.entryType === 'credit' ? 'Transfer from Copup account' : 'Transfer to Copup account'
+  return item.entryType === 'credit' ? 'Transfer from Opay account' : 'Transfer to Opay account'
 }
 
 const Transactions = () => {
@@ -159,7 +159,7 @@ const Transactions = () => {
           <dl>
             <div>
               <dt>{isCredit ? 'Credited to' : 'Recipient Details'}</dt>
-              <dd>{isCredit ? 'Available Balance' : 'Copup Wallet'}</dd>
+              <dd>{isCredit ? 'Available Balance' : 'Opay Wallet'}</dd>
             </div>
             <div>
               <dt>{isCredit ? 'Sender Details' : 'Remark'}</dt>

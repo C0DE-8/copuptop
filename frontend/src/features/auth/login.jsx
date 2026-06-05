@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { loginUser } from '../../api/auth.api'
+import logo from '../../assets/logo.png'
 import styles from './login.module.css'
 
 const Login = () => {
@@ -39,9 +40,9 @@ const Login = () => {
     <main className={styles.page}>
       <section className={styles.panel}>
         <div className={styles.brand}>
-          <span className={styles.mark}>CB</span>
+          <img className={styles.mark} src={logo} alt="Opay" />
           <div>
-            <p>Copup Bank</p>
+            <p>Opay</p>
             <h1>Sign in to your account</h1>
           </div>
         </div>
@@ -79,13 +80,13 @@ const Login = () => {
         </form>
 
         <p className={styles.switch}>
-          New to Copup Bank? <Link to="/register">Create an account</Link>
+          New to Opay? <Link to="/register">Create an account</Link>
         </p>
       </section>
 
       <aside className={styles.summary}>
-        <p className={styles.eyebrow}>Operating account</p>
-        <h2>Wallets, bank transfers, and transaction control from one desk.</h2>
+        <p className={styles.eyebrow}>Beyond banking</p>
+        <h2>Wallets, bank transfers, and transaction control from one secure app.</h2>
         <div className={styles.metrics}>
           <span>Ledger-first balance</span>
           <strong>24/7</strong>

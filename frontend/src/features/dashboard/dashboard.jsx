@@ -72,7 +72,7 @@ const Dashboard = () => {
     loadDashboard()
   }, [])
 
-  const firstName = profile?.firstName || 'Copup'
+  const firstName = profile?.firstName || 'Opay'
   const lastName = profile?.lastName || 'customer'
   const initials = `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase()
   const currency = wallet?.currency === 'NGN' ? '₦' : wallet?.currency || '₦'
