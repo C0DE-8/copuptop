@@ -120,14 +120,16 @@ const Dashboard = () => {
           </div>
         </article>
 
-        <div className={styles.businessStrip}>
-          <FaStore />
-          <p>
-            Business Service - Today's Sales:
-            <span>{balanceVisible ? `${currency}${balance}` : '****'}</span>
-          </p>
-          <FiChevronRight />
-        </div>
+        {balanceVisible && (
+          <div className={styles.businessStrip}>
+            <FaStore />
+            <p>
+              Business Service - Today's Sales:
+              <span>{currency}{balance}</span>
+            </p>
+            <FiChevronRight />
+          </div>
+        )}
       </section>
 
       {balanceVisible && recentTransactions.length > 0 && (
@@ -193,25 +195,13 @@ const Dashboard = () => {
       </section>
 
       <section className={styles.promo}>
-        <FaGift />
         <div>
-          <strong>Smart Picks for You</strong>
-          <span>Start a Target</span>
+          <strong>Up to 6% Cashback on Bills</strong>
+          <span>Pay smarter and get rewarded every time you pay.</span>
         </div>
-        <Link to="/wallet">Go</Link>
-      </section>
-
-      <section className={styles.invitePromo}>
-        <FaGift />
-        <div>
-          <strong>Cash up for grabs!</strong>
-          <span>Invite friends and earn up to ₦6,300 Bonus</span>
-        </div>
-        <div className={styles.dots} aria-hidden="true">
-          <span />
-          <span />
-          <span />
-          <span />
+        <div className={styles.promoVisual} aria-hidden="true">
+          <FaGift />
+          <span>6%</span>
         </div>
       </section>
 
