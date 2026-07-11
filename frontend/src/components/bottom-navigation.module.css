@@ -5,46 +5,69 @@
 @media (max-width: 760px) {
   .mobileNav {
     position: fixed;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    right: 32px;
+    bottom: 23px;
+    left: 32px;
     z-index: 50;
-    height: 64px;
+    height: 94px;
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
     align-items: center;
-    padding: 5px 14px max(5px, env(safe-area-inset-bottom));
-    border-top: 1px solid #191919;
-    background: #0f0f0f;
+    padding: 8px 7px;
+    border: 1px solid #3a3a3a;
+    border-radius: 999px;
+    background: rgba(19, 19, 19, 0.96);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
   }
 
   .mobileNav a {
     min-width: 0;
-    height: 50px;
+    height: 78px;
     display: grid;
     justify-items: center;
     align-content: center;
-    gap: 3px;
+    gap: 5px;
+    border-radius: 999px;
     color: #a6a6a6;
-    font-size: 12px;
-    font-weight: 850;
+    font-size: 14px;
+    font-weight: 600;
     line-height: 1.1;
     text-decoration: none;
   }
 
   .mobileNav svg {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     padding: 4px;
     border-radius: 50%;
   }
 
   .mobileNav a.active {
+    background: #414141;
     color: #28d0a8;
   }
 
   .mobileNav a.active svg {
     background: #28d0a8;
     color: #111111;
+  }
+
+  @media (max-width: 520px) {
+    .mobileNav {
+      right: 24px;
+      bottom: 19px;
+      left: 24px;
+      height: 82px;
+    }
+
+    .mobileNav a {
+      height: 66px;
+      font-size: 12px;
+    }
+
+    .mobileNav svg {
+      width: 24px;
+      height: 24px;
+    }
   }
 }

@@ -28,7 +28,7 @@ const services = [
   { label: 'Data', icon: FaMobileAlt },
   { label: 'Betting', icon: FaDice },
   { label: 'TV', icon: FaTv },
-  { label: 'SafeBox', icon: FaPiggyBank },
+  { label: 'Fixed', icon: FaPiggyBank },
   { label: 'Loan', icon: FaHandHoldingUsd },
   { label: 'BizPayment', icon: FaStore },
   { label: 'More', icon: FaThLarge },
@@ -106,41 +106,52 @@ const Dashboard = () => {
 
       {error && <p className={styles.error}>{error}</p>}
 
-      <article className={styles.balanceCard}>
-        <div className={styles.balanceTop}>
-          <p>
-            <FiShield />
-            Available Balance
+      <section className={styles.balanceStack}>
+        <article className={styles.balanceCard}>
+          <div className={styles.balanceTop}>
+            <p>
+              <FiShield />
+              Available Balance
+              <button
+                className={styles.eyeButton}
+                type="button"
+                onClick={() => setBalanceVisible((current) => !current)}
+                aria-label={balanceVisible ? 'Hide balance' : 'Show balance'}
+              >
+                {balanceVisible ? <FiEye /> : <FiEyeOff />}
+              </button>
+            </p>
+            <Link to="/transactions">
+              Transaction History <FiChevronRight />
+            </Link>
+          </div>
+          <div className={styles.balanceBottom}>
             <button
-              className={styles.eyeButton}
+              className={styles.balanceAmount}
               type="button"
               onClick={() => setBalanceVisible((current) => !current)}
               aria-label={balanceVisible ? 'Hide balance' : 'Show balance'}
             >
-              {balanceVisible ? <FiEye /> : <FiEyeOff />}
+              <strong>{balanceVisible ? `${currency}${balance}` : '****'}</strong>
+              <FiChevronRight />
             </button>
-          </p>
-          <Link to="/transactions">
-            Transaction History <FiChevronRight />
-          </Link>
-        </div>
-        <div className={styles.balanceBottom}>
-          <button
-            className={styles.balanceAmount}
-            type="button"
-            onClick={() => setBalanceVisible((current) => !current)}
-            aria-label={balanceVisible ? 'Hide balance' : 'Show balance'}
-          >
-            <strong>{balanceVisible ? `${currency}${balance}` : '****'}</strong>
-            <FiChevronRight />
-          </button>
-          <Link className={styles.addMoney} to="/wallet">
-            <FiPlus /> Add Money
-          </Link>
-        </div>
-      </article>
+            <Link className={styles.addMoney} to="/wallet">
+              <FiPlus /> Add Money
+            </Link>
+          </div>
+        </article>
 
-      {balanceVisible && (
+        <div className={styles.businessStrip}>
+          <FaStore />
+          <p>
+            Business Service - Today's Sales:
+            <span>₦6,200.00</span>
+          </p>
+          <FiChevronRight />
+        </div>
+      </section>
+
+      {balanceVisible && recentTransactions.length > 0 && (
         <section className={styles.activityCard} aria-label="Recent wallet activity">
           {recentTransactions.map((item) => {
             const isCredit = item.entryType === 'credit'
@@ -163,7 +174,6 @@ const Dashboard = () => {
               </div>
             )
           })}
-          {recentTransactions.length === 0 && <p className={styles.empty}>No wallet activity yet.</p>}
         </section>
       )}
 
@@ -201,8 +211,17 @@ const Dashboard = () => {
       <section className={styles.promo}>
         <FaGift />
         <div>
+          <strong>Smart Picks for You</strong>
+          <span>Start a Target</span>
+        </div>
+        <Link to="/wallet">Go</Link>
+      </section>
+
+      <section className={styles.invitePromo}>
+        <FaGift />
+        <div>
           <strong>Cash up for grabs!</strong>
-          <span>Invite friends and earn up to ₦5,600 Bonus</span>
+          <span>Invite friends and earn up to ₦6,300 Bonus</span>
         </div>
         <div className={styles.dots} aria-hidden="true">
           <span />

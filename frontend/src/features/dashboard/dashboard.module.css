@@ -1,31 +1,24 @@
 .page {
   position: relative;
-  min-height: 100vh;
-  padding: 18px clamp(18px, 4vw, 34px) 138px;
+  min-height: 100dvh;
+  padding: 17px 26px 128px;
   background: #171717;
-  color: #f8fafc;
-}
-
-.page::before {
-  position: fixed;
-  inset: 0 auto 0 0;
-  width: min(100%, 620px);
-  pointer-events: none;
-  content: "";
-  background: radial-gradient(circle at 92% 82%, rgba(40, 208, 168, 0.16), transparent 19rem);
+  color: #f2f2f2;
+  overflow: hidden;
 }
 
 .header,
-.balanceCard,
+.balanceStack,
 .activityCard,
 .quickActions,
 .serviceGrid,
 .promo,
+.invitePromo,
 .security,
 .error {
   position: relative;
   z-index: 1;
-  width: min(100%, 620px);
+  width: min(100%, 572px);
   margin-right: auto;
   margin-left: auto;
 }
@@ -34,43 +27,44 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
-  margin-bottom: 18px;
+  gap: 12px;
+  margin-bottom: 48px;
 }
 
 .greeting {
   min-width: 0;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 9px;
 }
 
 .avatar {
   position: relative;
-  width: 42px;
-  height: 42px;
+  width: 58px;
+  height: 58px;
   flex: 0 0 auto;
   display: grid;
   place-items: center;
   border-radius: 50%;
-  border: 2px solid #ee8d5c;
-  background: linear-gradient(135deg, #30221d, #a9603c);
+  border: 2px solid #9a5a38;
+  background: repeating-linear-gradient(170deg, #2a1b18 0 8px, #a75f3d 9px 12px);
   color: #ffffff;
   font-size: 13px;
-  font-weight: 950;
+  font-weight: 900;
 }
 
 .avatar span {
   position: absolute;
-  right: -3px;
-  bottom: -3px;
-  width: 18px;
-  height: 18px;
+  right: -7px;
+  bottom: 2px;
+  width: 25px;
+  height: 25px;
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: #f1cf77;
-  color: #5f4317;
+  border: 2px solid rgba(255, 255, 255, 0.75);
+  background: #f1d991;
+  color: #6c511b;
   font-size: 10px;
   line-height: 1;
 }
@@ -79,9 +73,10 @@
   min-width: 0;
   margin: 0;
   color: #ffffff;
-  font-size: clamp(16px, 3.8vw, 20px);
-  font-weight: 750;
-  line-height: 1.2;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.05;
+  white-space: nowrap;
 }
 
 .greeting h1 span {
@@ -91,48 +86,53 @@
 .headerActions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 16px;
 }
 
 .headerActions button {
   position: relative;
-  width: 34px;
-  height: 34px;
+  width: 31px;
+  height: 31px;
   display: grid;
   place-items: center;
   border: 0;
-  border-radius: 10px;
+  padding: 0;
   background: transparent;
   color: #f2f2f2;
   cursor: pointer;
 }
 
 .headerActions svg {
-  width: 22px;
-  height: 22px;
+  width: 25px;
+  height: 25px;
 }
 
 .headerActions button span,
 .headerActions button strong {
   position: absolute;
-  top: -7px;
-  right: -6px;
-  min-width: 22px;
-  padding: 1px 5px;
+  top: -10px;
+  right: -8px;
+  min-width: 20px;
+  padding: 1px 4px;
   border-radius: 999px;
-  background: #fb5f8b;
+  background: #fb4e86;
   color: #ffffff;
   font-size: 9px;
-  font-weight: 950;
-  line-height: 1.35;
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+.balanceStack {
+  overflow: hidden;
+  border-radius: 14px;
+  background: #103f33;
 }
 
 .balanceCard {
-  padding: 17px 21px 16px;
-  border-radius: 15px;
-  background: #28d0a8;
-  color: #123c33;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+  padding: 28px 28px 20px;
+  border-radius: 14px;
+  background: #25d1a4;
+  color: #183b34;
 }
 
 .balanceTop,
@@ -144,7 +144,7 @@
 }
 
 .balanceTop {
-  margin-bottom: 14px;
+  margin-bottom: 28px;
 }
 
 .balanceTop p,
@@ -152,11 +152,11 @@
   min-width: 0;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   margin: 0;
   color: #173b33;
-  font-size: 13px;
-  font-weight: 800;
+  font-size: 20px;
+  font-weight: 400;
   line-height: 1;
   text-decoration: none;
 }
@@ -171,109 +171,147 @@
 }
 
 .balanceTop svg {
-  width: 18px;
-  height: 18px;
+  width: 21px;
+  height: 21px;
 }
 
 .eyeButton {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   flex: 0 0 auto;
   display: inline-grid;
   place-items: center;
   padding: 0;
   border: 0;
-  border-radius: 50%;
-  background: rgba(17, 61, 51, 0.22);
-  color: #183d35;
+  background: transparent;
+  color: #173b33;
   cursor: pointer;
 }
 
 .eyeButton svg {
-  width: 14px;
-  height: 14px;
+  width: 20px;
+  height: 20px;
 }
 
 .balanceAmount {
   min-width: 0;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 7px;
   padding: 0;
   border: 0;
   background: transparent;
-  color: #14352e;
+  color: #173b33;
   cursor: pointer;
 }
 
 .balanceAmount strong {
   overflow-wrap: anywhere;
-  font-size: clamp(24px, 7vw, 31px);
-  font-weight: 950;
+  font-size: 39px;
+  font-weight: 800;
   letter-spacing: 0;
   line-height: 1;
 }
 
 .balanceAmount svg {
-  width: 18px;
-  height: 18px;
+  width: 24px;
+  height: 24px;
 }
 
 .addMoney {
-  min-height: 40px;
+  min-height: 48px;
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 0 17px;
+  gap: 7px;
+  padding: 0 20px;
   border-radius: 999px;
-  background: #262626;
-  color: #28d0a8;
-  font-size: 13px;
-  font-weight: 900;
+  background: #272727;
+  color: #25d1a4;
+  font-size: 19px;
+  font-weight: 500;
   text-decoration: none;
 }
 
 .addMoney svg {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
+}
+
+.businessStrip {
+  min-height: 88px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 17px;
+  align-items: center;
+  padding: 18px 27px 17px;
+  color: #b6c8c2;
+}
+
+.businessStrip > svg:first-child {
+  width: 27px;
+  height: 27px;
+  color: #25d1a4;
+}
+
+.businessStrip > svg:last-child {
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+  border-radius: 50%;
+  background: #0c3229;
+  color: #25d1a4;
+}
+
+.businessStrip p {
+  margin: 0;
+  color: #b7c3c0;
+  font-size: 21px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.businessStrip span {
+  display: block;
+  color: #25d1a4;
 }
 
 .activityCard,
 .quickActions,
 .serviceGrid,
-.promo {
-  margin-top: 16px;
-  border-radius: 15px;
-  background: #2a2a2a;
+.promo,
+.invitePromo {
+  margin-top: 22px;
+  border-radius: 14px;
+  background: #292929;
 }
 
 .activityCard {
-  padding: 12px 18px;
+  padding: 18px 28px;
 }
 
 .activityRow {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: 13px;
+  gap: 17px;
   align-items: center;
-  padding: 10px 0;
+  padding: 9px 0;
 }
 
 .activityRow + .activityRow {
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-top: 0;
 }
 
 .percentIcon {
-  width: 44px;
-  height: 44px;
+  width: 56px;
+  height: 56px;
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: #f5edd7;
-  color: #e5ad37;
+  background: #ffdce8;
+  color: #f0407d;
   font-size: 22px;
-  font-weight: 950;
+  font-weight: 900;
 }
 
 .activityRow strong,
@@ -282,37 +320,39 @@
 }
 
 .activityRow strong {
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: 800;
+  color: #eeeeee;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.15;
 }
 
 .activityRow div span {
-  margin-top: 4px;
-  color: #a9a9a9;
-  font-size: 12px;
+  margin-top: 9px;
+  color: #b9b9b9;
+  font-size: 15px;
 }
 
 .activityRow p {
   margin: 0;
   color: #ffffff;
   text-align: right;
-  font-size: 15px;
-  font-weight: 950;
+  font-size: 21px;
+  font-weight: 500;
+  line-height: 1.15;
 }
 
 .activityRow p span {
-  margin-top: 3px;
-  color: #28d0a8;
-  font-size: 11px;
-  font-weight: 800;
+  margin-top: 8px;
+  color: #25d1a4;
+  font-size: 15px;
+  font-weight: 400;
 }
 
 .quickActions {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  padding: 18px 18px 19px;
+  padding: 22px 28px 16px;
 }
 
 .quickActions a,
@@ -320,110 +360,161 @@
   min-width: 0;
   display: grid;
   justify-items: center;
-  gap: 11px;
+  gap: 16px;
   border: 0;
   background: transparent;
-  color: #d7d7d7;
+  color: #d9d9d9;
   font: inherit;
-  font-size: 13px;
-  font-weight: 750;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.1;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
 }
 
 .quickActions a span {
-  width: 56px;
-  height: 56px;
+  width: 70px;
+  height: 70px;
   display: grid;
   place-items: center;
-  border-radius: 15px;
-  background: #202020;
-  color: #28d0a8;
+  border-radius: 18px;
+  background: #1a1a1a;
+  color: #25d1a4;
 }
 
 .quickActions svg {
-  width: 27px;
-  height: 27px;
+  width: 30px;
+  height: 30px;
 }
 
 .serviceGrid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  row-gap: 22px;
+  row-gap: 29px;
   column-gap: 8px;
-  padding: 20px 12px 22px;
+  padding: 34px 22px 26px;
 }
 
 .serviceGrid button {
   position: relative;
-  gap: 10px;
+  gap: 13px;
 }
 
 .serviceGrid button span {
-  width: 48px;
-  height: 48px;
+  width: 64px;
+  height: 64px;
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: #202020;
+  background: #171717;
   color: #f7f7f7;
 }
 
 .serviceGrid svg {
-  width: 22px;
-  height: 22px;
+  width: 29px;
+  height: 29px;
+}
+
+.serviceGrid button:nth-child(3) svg {
+  color: #25d1a4;
 }
 
 .serviceGrid button em {
   position: absolute;
-  top: -13px;
+  top: -14px;
   left: 50%;
   z-index: 1;
-  transform: translateX(-16%);
+  transform: translateX(-20%);
   padding: 2px 7px;
   border-radius: 999px;
   background: #f65f87;
   color: #ffffff;
   font-size: 9px;
   font-style: normal;
-  font-weight: 950;
+  font-weight: 900;
   line-height: 1.25;
   white-space: nowrap;
 }
 
 .promo {
-  min-height: 96px;
+  min-height: 150px;
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 16px;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 22px;
   align-items: center;
-  padding: 18px 22px;
+  padding: 22px 22px 26px;
   overflow: hidden;
+  background: #032c24;
 }
 
 .promo > svg {
-  width: 35px;
-  height: 35px;
-  color: #28d0a8;
-  transform: rotate(-18deg);
+  width: 44px;
+  height: 44px;
+  color: #62e6c8;
 }
 
 .promo strong,
-.promo span {
+.promo span,
+.invitePromo strong,
+.invitePromo span {
   display: block;
 }
 
 .promo strong {
+  margin-bottom: 58px;
   color: #ffffff;
-  font-size: 17px;
-  font-weight: 950;
+  font-size: 23px;
+  font-weight: 700;
 }
 
 .promo span {
-  margin-top: 4px;
+  color: #ffffff;
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.promo a {
+  min-width: 75px;
+  min-height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #25d1a4;
+  color: #08241e;
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.invitePromo {
+  min-height: 124px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 24px;
+  align-items: center;
+  padding: 22px 28px;
+}
+
+.invitePromo > svg {
+  width: 42px;
+  height: 42px;
+  color: #25d1a4;
+  transform: rotate(-18deg);
+}
+
+.invitePromo strong {
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.invitePromo span {
+  margin-top: 7px;
   color: #c7c7c7;
-  font-size: 13px;
+  font-size: 19px;
+  line-height: 1.2;
 }
 
 .dots {
@@ -439,18 +530,18 @@
   width: 5px;
   height: 5px;
   border-radius: 999px;
-  background: #6b6b6b;
+  background: #4d4d4d;
 }
 
 .dots span:first-child {
-  width: 18px;
-  background: #eeeeee;
+  width: 24px;
+  background: #0f0f0f;
 }
 
 .security {
   position: fixed;
-  right: max(-8px, calc((100vw - 620px) / 2 - 10px));
-  bottom: calc(78px + env(safe-area-inset-bottom));
+  right: max(-8px, calc((100vw - 572px) / 2 - 22px));
+  bottom: calc(88px + env(safe-area-inset-bottom));
   display: grid;
   justify-items: center;
   gap: 2px;
@@ -461,27 +552,27 @@
 }
 
 .security svg {
-  width: 62px;
-  height: 62px;
-  padding: 12px;
-  border-radius: 21px;
+  width: 80px;
+  height: 80px;
+  padding: 15px;
+  border-radius: 24px;
   background: #79f3d6;
   color: #ffffff;
   filter: drop-shadow(0 0 16px rgba(35, 211, 169, 0.7));
 }
 
 .security span {
-  padding: 5px 9px;
+  padding: 6px 9px;
   border-radius: 999px;
   border: 2px solid rgba(255, 255, 255, 0.82);
-  background: #28d0a8;
-  font-size: 10px;
-  font-weight: 950;
+  background: #25d1a4;
+  font-size: 12px;
+  font-weight: 900;
   white-space: nowrap;
 }
 
 .credit {
-  color: #28d0a8;
+  color: #25d1a4;
 }
 
 .debit {
@@ -519,22 +610,93 @@
 
 @media (max-width: 520px) {
   .page {
-    padding-right: 22px;
-    padding-left: 22px;
+    padding: 17px 20px 118px;
+  }
+
+  .header {
+    margin-bottom: 42px;
+  }
+
+  .avatar {
+    width: 47px;
+    height: 47px;
+  }
+
+  .avatar span {
+    width: 21px;
+    height: 21px;
+  }
+
+  .greeting h1 {
+    font-size: 20px;
+  }
+
+  .headerActions {
+    gap: 11px;
+  }
+
+  .balanceCard {
+    padding: 23px 23px 18px;
+  }
+
+  .balanceTop {
+    margin-bottom: 22px;
   }
 
   .balanceTop p,
   .balanceTop a {
-    font-size: 12px;
+    font-size: 16px;
   }
 
-  .balanceBottom {
-    gap: 10px;
+  .balanceAmount strong {
+    font-size: 31px;
   }
 
   .addMoney {
-    min-height: 38px;
-    padding: 0 14px;
-    font-size: 12px;
+    min-height: 42px;
+    padding: 0 15px;
+    font-size: 16px;
+  }
+
+  .businessStrip {
+    min-height: 72px;
+    padding: 14px 23px;
+  }
+
+  .businessStrip p {
+    font-size: 17px;
+  }
+
+  .quickActions a,
+  .serviceGrid button {
+    font-size: 16px;
+  }
+
+  .quickActions a span {
+    width: 58px;
+    height: 58px;
+  }
+
+  .serviceGrid button span {
+    width: 53px;
+    height: 53px;
+  }
+
+  .promo strong {
+    margin-bottom: 45px;
+    font-size: 19px;
+  }
+
+  .promo span,
+  .promo a {
+    font-size: 17px;
+  }
+
+  .invitePromo strong {
+    font-size: 19px;
+  }
+
+  .invitePromo span {
+    font-size: 16px;
   }
 }
