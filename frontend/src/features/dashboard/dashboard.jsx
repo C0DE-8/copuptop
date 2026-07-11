@@ -139,7 +139,7 @@ const Dashboard = () => {
               <button
                 className={styles.activityRow}
                 type="button"
-                onClick={() => navigate('/transactions', { state: { transactionReference: item.reference } })}
+                onClick={() => navigate(`/transaction/${formatTransactionReference(item.reference)}`)}
                 key={item.reference}
               >
                 <div className={styles.percentIcon} aria-hidden="true">

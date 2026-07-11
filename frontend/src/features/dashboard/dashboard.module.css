@@ -1,7 +1,7 @@
 .page {
   position: relative;
   min-height: 100dvh;
-  padding: 0 26px 128px;
+  padding: 126px 26px 128px;
   background: #171717;
   color: #f2f2f2;
   overflow-x: hidden;
@@ -507,6 +507,7 @@
 
 @media (min-width: 761px) {
   .page {
+    padding-top: 126px;
     padding-bottom: 70px;
   }
 
@@ -517,7 +518,7 @@
 
 @media (max-width: 520px) {
   .page {
-    padding: 0 16px 112px;
+    padding: 100px 16px 112px;
   }
 
   .balanceCard {
@@ -700,6 +701,7 @@
 
 @media (max-width: 390px) {
   .page {
+    padding-top: 100px;
     padding-right: 14px;
     padding-left: 14px;
   }

@@ -5,6 +5,8 @@ import Register from './features/auth/register'
 import Dashboard from './features/dashboard/dashboard'
 import Wallet from './features/wallet/wallet'
 import Transactions from './features/transactions/transactions'
+import TransactionDetail from './features/transaction-detail/transaction-detail'
+import Receipt from './features/receipts/receipt'
 import Bank from './features/bank/bank'
 import Me from './features/me/me'
 import AppShell from './components/app-shell'
@@ -99,6 +101,8 @@ const App = () => (
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/wallet" element={<Wallet />} />
           <Route path="/transactions" element={<Transactions />} />
+          <Route path="/transaction/:transactionId" element={<TransactionDetail />} />
+          <Route path="/receipt/:transactionId" element={<Receipt />} />
           <Route path="/bank" element={<Bank />} />
           <Route path="/me" element={<Me />} />
         </Route>

@@ -1,14 +1,16 @@
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  right: 0;
+  left: 0;
   z-index: 40;
-  width: min(100%, 572px);
+  width: min(calc(100% - 52px), 572px);
   min-height: 110px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin: 0 auto 46px;
+  margin: 0 auto;
   padding-top: 17px;
   background: #171717;
 }
@@ -112,9 +114,9 @@
 
 @media (max-width: 520px) {
   .header {
+    width: calc(100% - 32px);
     min-height: 76px;
     gap: 8px;
-    margin-bottom: 24px;
     padding-top: 11px;
   }
 
@@ -185,5 +187,11 @@
 
   .greeting h1 {
     font-size: 14px;
+  }
+}
+
+@media (max-width: 390px) {
+  .header {
+    width: calc(100% - 28px);
   }
 }
