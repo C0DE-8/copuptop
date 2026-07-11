@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FiChevronRight, FiEye, FiEyeOff, FiPlus, FiShield } from 'react-icons/fi'
 import {
   FaChartBar,
@@ -42,6 +42,7 @@ const moneyActions = [
 const formatTransactionReference = (value) => String(value || '').replace(/\D/g, '') || value
 
 const Dashboard = () => {
+  const navigate = useNavigate()
   const [profile, setProfile] = useState(null)
   const [wallet, setWallet] = useState(null)
   const [transactions, setTransactions] = useState([])
@@ -135,7 +136,12 @@ const Dashboard = () => {
             const isCredit = item.entryType === 'credit'
 
             return (
-              <div className={styles.activityRow} key={item.reference}>
+              <button
+                className={styles.activityRow}
+                type="button"
+                onClick={() => navigate('/transactions', { state: { transactionReference: item.reference } })}
+                key={item.reference}
+              >
                 <div className={styles.percentIcon} aria-hidden="true">
                   %
                 </div>
@@ -149,7 +155,7 @@ const Dashboard = () => {
                   {Number(item.amount).toLocaleString()}
                   <span>{item.status || 'Successful'}</span>
                 </p>
-              </div>
+              </button>
             )
           })}
         </section>

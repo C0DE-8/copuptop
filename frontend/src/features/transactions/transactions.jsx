@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import {
   FiArrowLeft,
   FiCheck,
@@ -193,6 +193,7 @@ const TransactionIcon = ({ item }) => {
 
 const Transactions = () => {
   const navigate = useNavigate()
+  const location = useLocation()
   const [wallet, setWallet] = useState(null)
   const [ledger, setLedger] = useState([])
   const [error, setError] = useState('')
@@ -212,8 +213,20 @@ const Transactions = () => {
           return
         }
 
+        const nextLedger = ledgerResult.data.ledger || []
+        const targetReference = location.state?.transactionReference
+        const targetTransaction = targetReference
+          ? nextLedger.find((item) => String(item.reference) === String(targetReference))
+          : null
+
         setWallet(walletResult.data.wallet)
-        setLedger(ledgerResult.data.ledger || [])
+        setLedger(nextLedger)
+
+        if (targetTransaction) {
+          setSelectedTransaction(targetTransaction)
+          setShowReceipt(false)
+          window.history.replaceState({}, '')
+        }
       } catch (err) {
         if (active) {
           setError(err.response?.data?.message || 'Unable to load transactions')
@@ -226,7 +239,7 @@ const Transactions = () => {
     return () => {
       active = false
     }
-  }, [])
+  }, [location.state])
 
   const filteredLedger = useMemo(() => {
     return ledger.filter((item) => {

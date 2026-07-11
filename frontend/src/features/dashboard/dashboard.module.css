@@ -191,11 +191,18 @@
 }
 
 .activityRow {
+  width: 100%;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   gap: 17px;
   align-items: center;
   padding: 9px 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
 }
 
 .activityRow + .activityRow {
