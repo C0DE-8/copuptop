@@ -10,7 +10,6 @@ import Me from './features/me/me'
 import AppShell from './components/app-shell'
 import ProtectedRoute from './routes/protected-route'
 import { isAuthenticated } from './routes/auth-session'
-import logo from './assets/logo.png'
 import splash from './assets/splash.jpg'
 
 const OpeningSplash = () => {
@@ -29,11 +28,6 @@ const OpeningSplash = () => {
   return (
     <div className="openingSplash" aria-label="Opening Opay">
       <img className="openingSplashBackground" src={splash} alt="" />
-      <div className="openingSplashContent">
-        <img src={logo} alt="Opay" />
-        <p>Opay</p>
-        <span>Beyond banking</span>
-      </div>
     </div>
   )
 }
@@ -61,7 +55,6 @@ const OfflineSplash = () => {
     <div className="offlineSplash" role="status" aria-live="polite">
       <img className="openingSplashBackground" src={splash} alt="" />
       <div className="openingSplashContent">
-        <img src={logo} alt="Opay" />
         <p>Connection unavailable</p>
         <span>Opay will continue when your network returns</span>
       </div>
@@ -80,7 +73,7 @@ class AppFallback extends Component {
     if (this.state.hasError) {
       return (
         <main className="appFallback">
-          <img src={logo} alt="Opay" />
+          <img className="appFallbackBackground" src={splash} alt="" />
           <h1>Opay is starting again</h1>
           <p>Refresh the app to continue banking.</p>
           <button type="button" onClick={() => window.location.reload()}>
