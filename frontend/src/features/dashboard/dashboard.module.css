@@ -678,11 +678,12 @@
 
   .balanceTop p,
   .balanceTop a {
-    font-size: 14px;
+    font-size: clamp(12px, 3.55vw, 14px);
   }
 
   .balanceAmount strong {
-    font-size: 26px;
+    font-size: clamp(20px, 5.55vw, 26px);
+    white-space: nowrap;
   }
 
   .balanceAmount svg,
@@ -692,9 +693,9 @@
   }
 
   .addMoney {
-    min-height: 36px;
-    padding: 0 13px;
-    font-size: 14px;
+    min-height: 34px;
+    padding: 0 12px;
+    font-size: clamp(12px, 3.4vw, 14px);
   }
 
   .businessStrip {
@@ -828,8 +829,9 @@
   }
 
   .security {
-    right: -42px;
-    bottom: calc(86px + env(safe-area-inset-bottom));
+    right: -50px;
+    bottom: calc(94px + env(safe-area-inset-bottom));
+    z-index: 45;
   }
 
   .security svg {
@@ -840,7 +842,124 @@
   }
 
   .security span {
-    padding: 4px 7px;
-    font-size: 9px;
+    display: none;
+  }
+}
+
+@media (max-width: 390px) {
+  .page {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .balanceCard {
+    padding: 15px 16px 14px;
+  }
+
+  .balanceTop {
+    gap: 8px;
+  }
+
+  .balanceTop p,
+  .balanceTop a {
+    gap: 4px;
+  }
+
+  .balanceTop svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .eyeButton {
+    width: 18px;
+    height: 18px;
+  }
+
+  .eyeButton svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .balanceBottom {
+    gap: 8px;
+  }
+
+  .balanceAmount strong {
+    font-size: clamp(18px, 5.25vw, 21px);
+  }
+
+  .balanceAmount svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .addMoney {
+    min-height: 32px;
+    gap: 4px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  .addMoney svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .activityRow {
+    grid-template-columns: auto minmax(0, 1fr) minmax(68px, auto);
+  }
+
+  .serviceGrid {
+    column-gap: 4px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+}
+
+@media (max-width: 340px) {
+  .headerActions {
+    gap: 5px;
+  }
+
+  .headerActions button {
+    width: 22px;
+    height: 22px;
+  }
+
+  .headerActions svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .greeting {
+    gap: 7px;
+  }
+
+  .avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  .greeting h1 {
+    font-size: 14px;
+  }
+
+  .balanceTop {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .balanceBottom {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .addMoney {
+    align-self: flex-end;
+  }
+
+  .quickActions a,
+  .serviceGrid button {
+    font-size: 12px;
   }
 }
