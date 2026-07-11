@@ -7,6 +7,8 @@ import {
   FiChevronRight,
   FiCopy,
   FiDownload,
+  FiImage,
+  FiPrinter,
   FiRefreshCw,
   FiShare2,
   FiUser,
@@ -43,6 +45,16 @@ const formatDate = (value) => {
   })
 }
 
+const formatReceiptDate = (value) =>
+  new Date(value || Date.now()).toLocaleString(undefined, {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+  })
+
 const formatMonth = (value) =>
   new Date(value || Date.now()).toLocaleString(undefined, { month: 'short', year: 'numeric' })
 
@@ -60,6 +72,14 @@ const maskAccount = (value) => {
   }
 
   return `${text.slice(0, 3)}****${text.slice(-3)}`
+}
+
+const readStoredUser = () => {
+  try {
+    return JSON.parse(localStorage.getItem('copup_user') || 'null')
+  } catch {
+    return null
+  }
 }
 
 const getCounterpartyName = (item) => {
@@ -128,6 +148,32 @@ const getPartyDetails = (item) => {
   return masked ? `${counterpartyName}\n${paymentLabel} | ${masked}` : `${counterpartyName}\n${paymentLabel}`
 }
 
+const getReceiptParties = (item) => {
+  const user = readStoredUser()
+  const userName = compactName(`${user?.firstName || ''} ${user?.lastName || ''}`) || 'OPAY USER'
+  const userPhone = user?.phone || user?.email || ''
+  const userDetails = maskAccount(userPhone) ? `OPay | ${maskAccount(userPhone)}` : 'OPay'
+  const counterpartyName = getCounterpartyName(item) || compactName(item.description) || 'OPAY'
+  const counterpartyAccount = item.bankAccountNumber || item.counterpartyPhone || item.counterpartyEmail || ''
+  const counterpartyDetails = maskAccount(counterpartyAccount) ? `OPay | ${maskAccount(counterpartyAccount)}` : getPaymentLabel(item)
+
+  if (item.entryType === 'credit') {
+    return {
+      recipientName: userName,
+      recipientDetails: userDetails,
+      senderName: counterpartyName,
+      senderDetails: counterpartyDetails,
+    }
+  }
+
+  return {
+    recipientName: counterpartyName,
+    recipientDetails: counterpartyDetails,
+    senderName: userName,
+    senderDetails: userDetails,
+  }
+}
+
 const TransactionIcon = ({ item }) => {
   const description = (item.description || '').toLowerCase()
 
@@ -145,6 +191,7 @@ const Transactions = () => {
   const [ledger, setLedger] = useState([])
   const [error, setError] = useState('')
   const [selectedTransaction, setSelectedTransaction] = useState(null)
+  const [showReceipt, setShowReceipt] = useState(false)
   const [category, setCategory] = useState(categoryOptions[0])
   const [status, setStatus] = useState(statusOptions[0])
 
@@ -200,11 +247,84 @@ const Transactions = () => {
     const amount = formatAmount(selectedTransaction).replace('+', '').replace('-', '')
     const partyDetails = getPartyDetails(selectedTransaction)
     const isTransfer = title.toLowerCase().startsWith('transfer')
+    const receiptParties = getReceiptParties(selectedTransaction)
+
+    if (showReceipt) {
+      return (
+        <section className={styles.receiptPage}>
+          <header className={styles.receiptTopbar}>
+            <button type="button" onClick={() => setShowReceipt(false)} aria-label="Back to transaction details">
+              <FiArrowLeft />
+            </button>
+            <h1>Share Receipt</h1>
+            <span />
+          </header>
+
+          <article className={styles.receiptCard}>
+            <div className={styles.receiptHeader}>
+              <div className={styles.receiptLogo}>
+                <span />
+                <strong>Pay</strong>
+              </div>
+              <p>Transaction Receipt</p>
+            </div>
+
+            <div className={styles.receiptStatus}>
+              <strong>{amount}</strong>
+              <span>{selectedTransaction.status || 'Successful'}</span>
+              <time>{formatReceiptDate(selectedTransaction.createdAt)}</time>
+            </div>
+
+            <div className={styles.receiptRows}>
+              <div>
+                <span>Recipient Details</span>
+                <strong>
+                  {receiptParties.recipientName}
+                  <small>{receiptParties.recipientDetails}</small>
+                </strong>
+              </div>
+              <div>
+                <span>Sender Details</span>
+                <strong>
+                  {receiptParties.senderName}
+                  <small>{receiptParties.senderDetails}</small>
+                </strong>
+              </div>
+              <div>
+                <span>Transaction No.</span>
+                <strong>{selectedTransaction.reference || '260710010100435781471369'}</strong>
+              </div>
+            </div>
+
+            <p className={styles.receiptNote}>
+              Enjoy a better life with OPay. Get free transfers, withdrawals, bill payments, instant loans, and good annual
+              interest On your savings. OPay is licensed by the Central Bank of Nigeria and insured by the NDIC.
+            </p>
+          </article>
+
+          <footer className={styles.receiptActions}>
+            <button type="button">
+              <FiImage /> Share as image
+            </button>
+            <button type="button">
+              <FiPrinter /> Share as PDF
+            </button>
+          </footer>
+        </section>
+      )
+    }
 
     return (
       <section className={styles.page}>
         <header className={styles.topbar}>
-          <button type="button" onClick={() => setSelectedTransaction(null)} aria-label="Back to transactions">
+          <button
+            type="button"
+            onClick={() => {
+              setShowReceipt(false)
+              setSelectedTransaction(null)
+            }}
+            aria-label="Back to transactions"
+          >
             <FiArrowLeft />
           </button>
           <h1>Transaction Details</h1>
@@ -297,7 +417,7 @@ const Transactions = () => {
 
         <div className={styles.detailFooter}>
           {!isCredit && <button type="button">Report Issue</button>}
-          <button type="button">
+          <button type="button" onClick={() => setShowReceipt(true)}>
             <FiShare2 /> Share Receipt
           </button>
         </div>
@@ -362,7 +482,10 @@ const Transactions = () => {
                 className={styles.historyRow}
                 type="button"
                 key={item.reference}
-                onClick={() => setSelectedTransaction(item)}
+                onClick={() => {
+                  setShowReceipt(false)
+                  setSelectedTransaction(item)
+                }}
               >
                 <span className={isCredit ? styles.creditIcon : styles.debitIcon}>
                   <TransactionIcon item={item} />

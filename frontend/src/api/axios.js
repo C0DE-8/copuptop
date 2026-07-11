@@ -36,6 +36,13 @@ apiClient.interceptors.response.use(
     if (status === 401) {
       localStorage.removeItem('copup_access_token')
       localStorage.removeItem('copup_refresh_token')
+
+      const requestUrl = String(error.config?.url || '')
+      const isAuthRequest = requestUrl.includes('/auth/login') || requestUrl.includes('/auth/register')
+
+      if (!isAuthRequest && window.location.pathname !== '/') {
+        window.location.assign('/')
+      }
     }
 
     return Promise.reject(error)

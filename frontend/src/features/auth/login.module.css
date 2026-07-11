@@ -7,21 +7,21 @@
 }
 
 .phone {
-  width: min(100%, 590px);
+  width: min(100%, 626px);
   min-height: 100dvh;
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: clamp(22px, 5vw, 36px) clamp(20px, 5vw, 34px) clamp(28px, 6vw, 46px);
+  padding: 24px clamp(26px, 4.3vw, 28px) 34px;
   background: #292929;
 }
 
 .topBar {
-  min-height: 44px;
+  min-height: 42px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: clamp(28px, 7vh, 62px);
+  margin-bottom: 50px;
 }
 
 .topBar button {
@@ -37,14 +37,14 @@
 }
 
 .topBar svg {
-  width: 34px;
-  height: 34px;
+  width: 31px;
+  height: 31px;
   stroke-width: 2.5;
 }
 
 .topBar a {
   color: #24d39f;
-  font-size: clamp(18px, 4vw, 24px);
+  font-size: clamp(21px, 3.8vw, 25px);
   font-weight: 500;
   line-height: 1;
   text-decoration: none;
@@ -55,61 +55,61 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  margin: 0 0 clamp(54px, 10vh, 76px);
+  margin: 0 0 72px;
 }
 
 .logoLine img {
-  width: 48px;
-  height: 48px;
+  width: 49px;
+  height: 49px;
   object-fit: contain;
 }
 
 .logoLine strong {
   color: #ffffff;
-  font-size: clamp(36px, 9vw, 42px);
+  font-size: clamp(39px, 7vw, 44px);
   font-weight: 900;
   line-height: 1;
 }
 
 .fullForm {
   display: grid;
-  gap: 18px;
+  gap: 21px;
 }
 
 .fullForm h1 {
   margin: 0 0 18px;
   color: #efefef;
-  font-size: clamp(32px, 7vw, 40px);
+  font-size: clamp(36px, 6.45vw, 41px);
   font-weight: 800;
-  line-height: 1.15;
+  line-height: 1.12;
 }
 
 .inputShell {
   position: relative;
-  height: 91px;
+  height: 96px;
   border: 1px solid #454545;
-  border-radius: 8px;
+  border-radius: 9px;
 }
 
 .inputShell label {
   position: absolute;
-  top: -16px;
-  left: clamp(14px, 4vw, 24px);
+  top: -17px;
+  left: 25px;
   padding: 0 8px;
   background: #292929;
   color: #22ce9e;
-  font-size: clamp(16px, 4vw, 20px);
-  font-weight: 500;
+  font-size: clamp(18px, 3.25vw, 20px);
+  font-weight: 600;
 }
 
 .inputShell input {
   width: 100%;
   height: 100%;
   border: 0;
-  padding: 21px clamp(18px, 5vw, 26px) 0;
+  padding: 25px 26px 0;
   background: transparent;
   color: #f2f2f2;
-  font-size: clamp(22px, 5vw, 27px);
+  font-size: clamp(25px, 4.45vw, 28px);
   font-weight: 500;
   outline: 0;
 }
@@ -117,7 +117,7 @@
 .changeLine {
   margin: 0;
   color: #b8b8b8;
-  font-size: clamp(16px, 4vw, 20px);
+  font-size: clamp(19px, 3.35vw, 21px);
   line-height: 1.35;
 }
 
@@ -134,13 +134,13 @@
 
 .returningForm input {
   width: 100%;
-  height: 92px;
+  height: 96px;
   border: 0;
   border-radius: 10px;
   padding: 0 24px;
   background: #191919;
   color: #ffffff;
-  font-size: 25px;
+  font-size: clamp(24px, 4.35vw, 28px);
   outline: 0;
 }
 
@@ -150,15 +150,15 @@
 }
 
 .primaryButton {
-  width: min(100% - 40px, 462px);
-  height: clamp(60px, 12vw, 78px);
+  width: min(100% - 82px, 490px);
+  height: 80px;
   justify-self: center;
   border: 0;
   border-radius: 999px;
-  margin-top: clamp(46px, 8vh, 72px);
+  margin-top: 126px;
   background: #26d0a4;
   color: #202020;
-  font-size: clamp(20px, 5vw, 25px);
+  font-size: clamp(22px, 4.05vw, 25px);
   font-weight: 700;
   cursor: pointer;
 }
@@ -169,9 +169,9 @@
 }
 
 .switch {
-  margin: 28px 0 0;
+  margin: 30px 0 0;
   color: #d0d0d0;
-  font-size: clamp(16px, 4vw, 20px);
+  font-size: clamp(20px, 3.65vw, 22px);
   text-align: center;
 }
 
@@ -185,26 +185,26 @@
   display: flex;
   justify-content: center;
   margin-top: auto;
-  padding-top: clamp(54px, 13vh, 140px);
+  padding-top: 120px;
   color: #f5f5f5;
-  font-size: 14px;
+  font-size: 16px;
   text-align: center;
 }
 
 .licenseLine strong {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 900;
 }
 
 .returningHeader {
   display: grid;
   justify-items: center;
-  margin-top: clamp(10px, 3vh, 28px);
+  margin-top: 0;
 }
 
 .avatar {
-  width: 106px;
-  height: 106px;
+  width: 110px;
+  height: 110px;
   display: grid;
   place-items: center;
   border-radius: 50%;
@@ -218,9 +218,9 @@
 }
 
 .returningHeader p {
-  margin: clamp(28px, 6vh, 36px) 0 14px;
+  margin: 38px 0 23px;
   color: #a9a9a9;
-  font-size: clamp(18px, 4vw, 22px);
+  font-size: clamp(22px, 3.85vw, 24px);
   font-weight: 500;
   line-height: 1;
 }
@@ -228,33 +228,33 @@
 .returningHeader h1 {
   margin: 0;
   color: #f2f2f2;
-  font-size: clamp(31px, 7vw, 37px);
+  font-size: clamp(37px, 6.6vw, 42px);
   font-weight: 800;
   line-height: 1.1;
 }
 
 .returningForm {
   display: grid;
-  margin-top: clamp(34px, 7vh, 48px);
+  margin-top: 44px;
 }
 
 .returningForm label {
-  margin-bottom: 12px;
+  margin-bottom: 13px;
   color: #d0d0d0;
-  font-size: clamp(19px, 4.5vw, 23px);
+  font-size: clamp(21px, 3.75vw, 24px);
   font-weight: 400;
 }
 
 .forgotButton {
   justify-self: end;
-  margin-top: 24px;
+  margin-top: 27px;
   color: #24d39f;
-  font-size: 18px;
+  font-size: clamp(18px, 3.25vw, 20px);
   font-weight: 700;
 }
 
 .returningForm .primaryButton {
-  margin-top: clamp(62px, 12vh, 86px);
+  margin-top: 82px;
   background: #0f765c;
 }
 
@@ -270,12 +270,40 @@
 }
 
 @media (max-width: 430px) {
+  .phone {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
   .topBar {
-    margin-bottom: 34px;
+    margin-bottom: 44px;
+  }
+
+  .logoLine {
+    margin-bottom: 58px;
   }
 
   .inputShell,
   .returningForm input {
-    height: 78px;
+    height: 84px;
+  }
+
+  .primaryButton {
+    width: min(100% - 40px, 490px);
+    height: 68px;
+    margin-top: 86px;
+  }
+
+  .returningForm .primaryButton {
+    margin-top: 70px;
+  }
+
+  .licenseLine {
+    padding-top: 78px;
+    font-size: 13px;
+  }
+
+  .licenseLine strong {
+    font-size: 17px;
   }
 }

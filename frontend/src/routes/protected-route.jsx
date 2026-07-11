@@ -1,6 +1,5 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
-
-export const isAuthenticated = () => Boolean(localStorage.getItem('copup_access_token'))
+import { isAuthenticated } from './auth-session'
 
 const ProtectedRoute = () => {
   const location = useLocation()
