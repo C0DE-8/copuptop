@@ -2,10 +2,8 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FiChevronRight, FiEye, FiEyeOff, FiPlus, FiShield } from 'react-icons/fi'
 import {
-  FaBell,
   FaChartBar,
   FaDice,
-  FaExpand,
   FaGift,
   FaHandHoldingUsd,
   FaMobileAlt,
@@ -21,6 +19,7 @@ import {
 import { getUserProfile } from '../../api/auth.api'
 import { getBalance } from '../../api/wallet.api'
 import { getTransactions } from '../../api/transaction.api'
+import DashboardHeader from './dashboard-header'
 import styles from './dashboard.module.css'
 
 const services = [
@@ -79,30 +78,7 @@ const Dashboard = () => {
 
   return (
     <section className={styles.page}>
-      <header className={styles.header}>
-        <div className={styles.greeting}>
-          <div className={styles.avatar} aria-hidden="true">
-            {initials}
-            <span>3</span>
-          </div>
-          <h1>
-            Hi, {firstName} <span>{lastName}</span>
-          </h1>
-        </div>
-        <div className={styles.headerActions} aria-label="Dashboard tools">
-          <button type="button" aria-label="Help">
-            <FaGift />
-            <span>HELP</span>
-          </button>
-          <button type="button" aria-label="Scan">
-            <FaExpand />
-          </button>
-          <button type="button" aria-label="Notifications">
-            <FaBell />
-            <strong>99+</strong>
-          </button>
-        </div>
-      </header>
+      <DashboardHeader firstName={firstName} lastName={lastName} initials={initials} />
 
       {error && <p className={styles.error}>{error}</p>}
 
@@ -145,7 +121,7 @@ const Dashboard = () => {
           <FaStore />
           <p>
             Business Service - Today's Sales:
-            <span>₦6,200.00</span>
+            <span>{balanceVisible ? `${currency}${balance}` : '****'}</span>
           </p>
           <FiChevronRight />
         </div>

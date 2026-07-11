@@ -22,114 +22,6 @@
   margin-left: auto;
 }
 
-.header {
-  position: relative;
-  z-index: 1;
-  width: min(100%, 572px);
-  min-height: 110px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin: 0 auto 46px;
-  padding-top: 17px;
-}
-
-.greeting {
-  min-width: 0;
-  flex: 1 1 auto;
-  display: flex;
-  align-items: center;
-  gap: 9px;
-}
-
-.avatar {
-  position: relative;
-  width: 58px;
-  height: 58px;
-  flex: 0 0 auto;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  border: 2px solid #9a5a38;
-  background: repeating-linear-gradient(170deg, #2a1b18 0 8px, #a75f3d 9px 12px);
-  color: #ffffff;
-  font-size: 13px;
-  font-weight: 900;
-}
-
-.avatar span {
-  position: absolute;
-  right: -7px;
-  bottom: 2px;
-  width: 25px;
-  height: 25px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.75);
-  background: #f1d991;
-  color: #6c511b;
-  font-size: 10px;
-  line-height: 1;
-}
-
-.greeting h1 {
-  min-width: 0;
-  margin: 0;
-  color: #ffffff;
-  font-size: 24px;
-  font-weight: 800;
-  line-height: 1.05;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.greeting h1 span {
-  display: inline-block;
-}
-
-.headerActions {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.headerActions button {
-  position: relative;
-  width: 31px;
-  height: 31px;
-  display: grid;
-  place-items: center;
-  border: 0;
-  padding: 0;
-  background: transparent;
-  color: #f2f2f2;
-  cursor: pointer;
-}
-
-.headerActions svg {
-  width: 25px;
-  height: 25px;
-}
-
-.headerActions button span,
-.headerActions button strong {
-  position: absolute;
-  top: -10px;
-  right: -8px;
-  min-width: 20px;
-  padding: 1px 4px;
-  border-radius: 999px;
-  background: #fb4e86;
-  color: #ffffff;
-  font-size: 9px;
-  font-weight: 900;
-  line-height: 1.25;
-}
-
 .balanceStack {
   overflow: hidden;
   border-radius: 14px;
@@ -621,53 +513,6 @@
     padding: 0 16px 112px;
   }
 
-  .header {
-    min-height: 76px;
-    gap: 8px;
-    margin-bottom: 24px;
-    padding-top: 11px;
-  }
-
-  .avatar {
-    width: 40px;
-    height: 40px;
-    font-size: 11px;
-  }
-
-  .avatar span {
-    right: -5px;
-    width: 18px;
-    height: 18px;
-    font-size: 9px;
-  }
-
-  .greeting h1 {
-    font-size: 16px;
-    font-weight: 800;
-  }
-
-  .headerActions {
-    gap: 8px;
-  }
-
-  .headerActions button {
-    width: 25px;
-    height: 25px;
-  }
-
-  .headerActions svg {
-    width: 21px;
-    height: 21px;
-  }
-
-  .headerActions button span,
-  .headerActions button strong {
-    top: -8px;
-    right: -7px;
-    min-width: 18px;
-    font-size: 8px;
-  }
-
   .balanceCard {
     padding: 16px 18px 15px;
   }
@@ -917,33 +762,6 @@
 }
 
 @media (max-width: 340px) {
-  .headerActions {
-    gap: 5px;
-  }
-
-  .headerActions button {
-    width: 22px;
-    height: 22px;
-  }
-
-  .headerActions svg {
-    width: 19px;
-    height: 19px;
-  }
-
-  .greeting {
-    gap: 7px;
-  }
-
-  .avatar {
-    width: 36px;
-    height: 36px;
-  }
-
-  .greeting h1 {
-    font-size: 14px;
-  }
-
   .balanceTop {
     align-items: flex-start;
     flex-direction: column;
