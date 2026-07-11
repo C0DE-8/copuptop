@@ -36,7 +36,6 @@ apiClient.interceptors.response.use(
     if (status === 401) {
       localStorage.removeItem('copup_access_token')
       localStorage.removeItem('copup_refresh_token')
-      localStorage.removeItem('copup_user')
     }
 
     return Promise.reject(error)

@@ -254,28 +254,29 @@ router.post('/login', async (req, res, next) => {
     try {
         ensureJwtConfigured();
 
-        const email = normalizeEmail(req.body.email);
+        const identifier = String(req.body.identifier || req.body.email || '').trim();
+        const normalizedIdentifier = normalizeEmail(identifier);
         const password = String(req.body.password || '');
 
-        if (!email || !password) {
+        if (!identifier || !password) {
             return res.status(400).json({
                 status: false,
-                message: 'email and password are required'
+                message: 'Mobile No./Email and password are required'
             });
         }
 
         const [users] = await connection.execute(
             `SELECT id, public_id, first_name, last_name, email, phone, password_hash, status, created_at
              FROM users
-             WHERE email = ?
+             WHERE email = ? OR phone = ?
              LIMIT 1`,
-            [email]
+            [normalizedIdentifier, identifier]
         );
 
         if (users.length === 0) {
             return res.status(401).json({
                 status: false,
-                message: 'Invalid email or password'
+                message: 'Invalid Mobile No./Email or password'
             });
         }
 
@@ -293,7 +294,7 @@ router.post('/login', async (req, res, next) => {
         if (!passwordMatches) {
             return res.status(401).json({
                 status: false,
-                message: 'Invalid email or password'
+                message: 'Invalid Mobile No./Email or password'
             });
         }
 

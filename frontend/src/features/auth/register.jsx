@@ -4,6 +4,22 @@ import { registerUser } from '../../api/auth.api'
 import logo from '../../assets/logo.png'
 import styles from './register.module.css'
 
+const rememberUser = (user) => {
+  if (!user) {
+    return
+  }
+
+  localStorage.setItem(
+    'copup_remembered_user',
+    JSON.stringify({
+      email: user.email,
+      phone: user.phone,
+      firstName: user.firstName,
+      lastName: user.lastName,
+    }),
+  )
+}
+
 const Register = () => {
   const navigate = useNavigate()
   const [form, setForm] = useState({
@@ -32,6 +48,7 @@ const Register = () => {
       localStorage.setItem('copup_access_token', result.data.accessToken)
       localStorage.setItem('copup_refresh_token', result.data.refreshToken)
       localStorage.setItem('copup_user', JSON.stringify(result.data.user))
+      rememberUser(result.data.user)
       navigate('/dashboard', { replace: true })
     } catch (err) {
       setError(err.response?.data?.message || 'Unable to create account')

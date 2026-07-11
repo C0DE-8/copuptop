@@ -11,7 +11,6 @@ const Navigation = () => {
   const handleLogout = () => {
     localStorage.removeItem('copup_access_token')
     localStorage.removeItem('copup_refresh_token')
-    localStorage.removeItem('copup_user')
     navigate('/', { replace: true })
   }
 
