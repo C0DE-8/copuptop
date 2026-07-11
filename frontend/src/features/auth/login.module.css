@@ -307,3 +307,128 @@
     font-size: 17px;
   }
 }
+
+@media (max-width: 390px) {
+  .phone {
+    padding: 18px 16px 28px;
+  }
+
+  .topBar {
+    min-height: 38px;
+    margin-bottom: 34px;
+  }
+
+  .topBar svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  .topBar a {
+    font-size: 18px;
+  }
+
+  .logoLine {
+    margin-bottom: 46px;
+  }
+
+  .logoLine img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .logoLine strong {
+    font-size: 36px;
+  }
+
+  .fullForm h1 {
+    margin-bottom: 12px;
+    font-size: 30px;
+  }
+
+  .inputShell,
+  .returningForm input {
+    height: 72px;
+  }
+
+  .inputShell label {
+    top: -14px;
+    left: 16px;
+    font-size: 15px;
+  }
+
+  .inputShell input,
+  .returningForm input {
+    font-size: 20px;
+  }
+
+  .changeLine,
+  .switch {
+    font-size: 15px;
+  }
+
+  .primaryButton {
+    width: min(100% - 34px, 490px);
+    height: 58px;
+    margin-top: 64px;
+    font-size: 18px;
+  }
+
+  .avatar {
+    width: 88px;
+    height: 88px;
+    font-size: 20px;
+  }
+
+  .returningHeader p {
+    margin: 26px 0 14px;
+    font-size: 18px;
+  }
+
+  .returningHeader h1 {
+    font-size: 30px;
+  }
+
+  .returningForm {
+    margin-top: 32px;
+  }
+
+  .returningForm label {
+    font-size: 17px;
+  }
+
+  .forgotButton {
+    margin-top: 18px;
+    font-size: 15px;
+  }
+
+  .returningForm .primaryButton {
+    margin-top: 54px;
+  }
+
+  .licenseLine {
+    padding-top: 54px;
+  }
+}
+
+@media (max-width: 340px) {
+  .fullForm h1 {
+    font-size: 26px;
+  }
+
+  .inputShell label {
+    font-size: 13px;
+  }
+
+  .inputShell input,
+  .returningForm input {
+    font-size: 18px;
+  }
+
+  .primaryButton {
+    width: 100%;
+  }
+
+  .switch {
+    font-size: 13px;
+  }
+}

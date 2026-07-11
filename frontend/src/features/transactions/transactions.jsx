@@ -74,6 +74,12 @@ const maskAccount = (value) => {
   return `${text.slice(0, 3)}****${text.slice(-3)}`
 }
 
+const formatTransactionReference = (value, fallback = '260710010100435781471369') => {
+  const digits = String(value || '').replace(/\D/g, '')
+
+  return digits || fallback
+}
+
 const readStoredUser = () => {
   try {
     return JSON.parse(localStorage.getItem('copup_user') || 'null')
@@ -292,7 +298,7 @@ const Transactions = () => {
               </div>
               <div>
                 <span>Transaction No.</span>
-                <strong>{selectedTransaction.reference || '260710010100435781471369'}</strong>
+                <strong>{formatTransactionReference(selectedTransaction.reference)}</strong>
               </div>
             </div>
 
@@ -365,7 +371,7 @@ const Transactions = () => {
             <div>
               <dt>Transaction No.</dt>
               <dd>
-                {selectedTransaction.reference || '260526010100733266924555'}
+                {formatTransactionReference(selectedTransaction.reference, '260526010100733266924555')}
                 <FiCopy />
               </dd>
             </div>
@@ -389,7 +395,7 @@ const Transactions = () => {
               <div>
                 <dt>Session ID</dt>
                 <dd>
-                  {(selectedTransaction.reference || '090267260526221139373004507015').slice(0, 30)}
+                  {formatTransactionReference(selectedTransaction.reference, '090267260526221139373004507015').slice(0, 30)}
                   <FiCopy />
                 </dd>
               </div>

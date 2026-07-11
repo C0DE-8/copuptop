@@ -4,6 +4,8 @@ import { getWallet } from '../../api/wallet.api'
 import { getTransactions } from '../../api/transaction.api'
 import styles from './wallet.module.css'
 
+const formatTransactionReference = (value) => String(value || '').replace(/\D/g, '') || value
+
 const Wallet = () => {
   const [wallet, setWallet] = useState(null)
   const [ledger, setLedger] = useState([])
@@ -128,7 +130,7 @@ const Wallet = () => {
             <div className={styles.row} key={item.reference}>
               <div>
                 <strong>{item.description || item.entryType}</strong>
-                <span>{item.reference}</span>
+                <span>{formatTransactionReference(item.reference)}</span>
               </div>
               <p className={item.entryType === 'credit' ? styles.credit : styles.debit}>
                 {item.entryType === 'credit' ? '+' : '-'}

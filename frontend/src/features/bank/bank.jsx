@@ -14,6 +14,8 @@ import styles from './bank.module.css'
 
 const frequentBanks = ['OPay', 'Access Bank', 'United Bank For Africa', 'First Bank Of Nigeria', 'Guaranty Trust Bank', 'Zenith Bank']
 
+const formatTransactionReference = (value) => String(value || '').replace(/\D/g, '') || value
+
 const recentRecipients = [
   { name: 'samuel oghenechovwe', meta: '2004507015 Kuda MFB', icon: 'K' },
   { name: 'POS Transfer- osuya favour adaeze', meta: '5974820297 MONIE POINT', icon: 'M' },
@@ -356,7 +358,7 @@ const Bank = () => {
 
           {amount > walletBalance && <p className={styles.error}>Insufficient wallet balance</p>}
           {error && <p className={styles.error}>{error}</p>}
-          {result && <p className={styles.success}>Transfer submitted with reference {result.reference}</p>}
+          {result && <p className={styles.success}>Transfer submitted with reference {formatTransactionReference(result.reference)}</p>}
 
           <div className={styles.confirmFooter}>
             <button type="submit" disabled={loading || !canSubmit}>
@@ -424,7 +426,7 @@ const Bank = () => {
         )}
 
         {error && <p className={styles.error}>{error}</p>}
-        {result && <p className={styles.success}>Transfer submitted with reference {result.reference}</p>}
+        {result && <p className={styles.success}>Transfer submitted with reference {formatTransactionReference(result.reference)}</p>}
 
         <button
           className={styles.nextButton}

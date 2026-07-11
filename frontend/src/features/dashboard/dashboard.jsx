@@ -39,6 +39,8 @@ const moneyActions = [
   { label: 'Withdraw', icon: FaWallet, to: '/bank' },
 ]
 
+const formatTransactionReference = (value) => String(value || '').replace(/\D/g, '') || value
+
 const Dashboard = () => {
   const [profile, setProfile] = useState(null)
   const [wallet, setWallet] = useState(null)
@@ -139,7 +141,7 @@ const Dashboard = () => {
                 </div>
                 <div>
                   <strong>{item.description || (isCredit ? 'Wallet Credit' : 'Wallet Debit')}</strong>
-                  <span>{item.createdAt ? new Date(item.createdAt).toLocaleString() : item.reference}</span>
+                  <span>{item.createdAt ? new Date(item.createdAt).toLocaleString() : formatTransactionReference(item.reference)}</span>
                 </div>
                 <p className={isCredit ? styles.credit : styles.debit}>
                   {isCredit ? '+' : '-'}

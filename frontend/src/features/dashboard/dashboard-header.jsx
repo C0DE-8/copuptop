@@ -1,9 +1,10 @@
+import { Link } from 'react-router-dom'
 import { FaBell, FaExpand, FaGift } from 'react-icons/fa'
 import styles from './dashboard-header.module.css'
 
 const DashboardHeader = ({ firstName, lastName, initials }) => (
   <header className={styles.header}>
-    <div className={styles.greeting}>
+    <Link className={styles.greeting} to="/me" aria-label="Open profile">
       <div className={styles.avatar} aria-hidden="true">
         {initials}
         <span>3</span>
@@ -11,7 +12,7 @@ const DashboardHeader = ({ firstName, lastName, initials }) => (
       <h1>
         Hi, {firstName} <span>{lastName}</span>
       </h1>
-    </div>
+    </Link>
     <div className={styles.headerActions} aria-label="Dashboard tools">
       <button type="button" aria-label="Help">
         <FaGift />
