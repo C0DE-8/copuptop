@@ -19,6 +19,7 @@ import {
 import { getUserProfile } from '../../api/auth.api'
 import { getBalance } from '../../api/wallet.api'
 import { getTransactions } from '../../api/transaction.api'
+import { formatAmount, formatDate, formatTransactionReference, getTransactionTitle } from '../transactions/transaction-helpers'
 import DashboardHeader from './dashboard-header'
 import styles from './dashboard.module.css'
 
@@ -38,8 +39,6 @@ const moneyActions = [
   { label: 'To Bank', icon: FaUniversity, to: '/bank' },
   { label: 'Withdraw', icon: FaWallet, to: '/bank' },
 ]
-
-const formatTransactionReference = (value) => String(value || '').replace(/\D/g, '') || value
 
 const Dashboard = () => {
   const navigate = useNavigate()
@@ -136,6 +135,7 @@ const Dashboard = () => {
         <section className={styles.activityCard} aria-label="Recent wallet activity">
           {recentTransactions.map((item) => {
             const isCredit = item.entryType === 'credit'
+            const transactionTitle = getTransactionTitle(item)
 
             return (
               <button
@@ -148,13 +148,11 @@ const Dashboard = () => {
                   %
                 </div>
                 <div>
-                  <strong>{item.description || (isCredit ? 'Wallet Credit' : 'Wallet Debit')}</strong>
-                  <span>{item.createdAt ? new Date(item.createdAt).toLocaleString() : formatTransactionReference(item.reference)}</span>
+                  <strong>{transactionTitle}</strong>
+                  <span>{item.createdAt ? formatDate(item.createdAt) : formatTransactionReference(item.reference)}</span>
                 </div>
                 <p className={isCredit ? styles.credit : styles.debit}>
-                  {isCredit ? '+' : '-'}
-                  {item.currency === 'NGN' ? '₦' : item.currency}
-                  {Number(item.amount).toLocaleString()}
+                  {formatAmount(item)}
                   <span>{item.status || 'Successful'}</span>
                 </p>
               </button>
