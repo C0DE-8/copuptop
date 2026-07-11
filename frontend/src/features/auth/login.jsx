@@ -114,17 +114,6 @@ const Login = () => {
   return (
     <main className={styles.page}>
       <section className={styles.phone}>
-        <header className={styles.statusBar} aria-hidden="true">
-          <span>1:09</span>
-          <span className={styles.statusIcons}>
-            <i />
-            <i />
-            <i />
-            <b />
-            <em />
-          </span>
-        </header>
-
         <nav className={styles.topBar}>
           <button type="button" aria-label="Go back" onClick={needsPassword ? handleUseAnotherAccount : undefined}>
             <FiChevronLeft />
